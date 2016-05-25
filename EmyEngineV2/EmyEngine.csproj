@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F2C2609A-3200-4FF2-AD3B-930EAE67C2E6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EmyEngine</RootNamespace>
+    <AssemblyName>EmyEngine</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\packages\Iconic.Zip\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\OpenTK\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClickHandler.cs" />
+    <Compile Include="DebugDrawer.cs" />
+    <Compile Include="EE.cs" />
+    <Compile Include="Exceptions.cs" />
+    <Compile Include="EventController.cs" />
+    <Compile Include="Game\BoxObject.cs" />
+    <Compile Include="Game\CarObject.cs" />
+    <Compile Include="Game\DefaultCar.cs" />
+    <Compile Include="Game\GameInstance.cs" />
+    <Compile Include="Game\GameObject.cs" />
+    <Compile Include="Game\GameObjectJShape.cs" />
+    <Compile Include="Game\MapLoader.cs" />
+    <Compile Include="Game\Marker.cs" />
+    <Compile Include="Game\ObjectivBody.cs" />
+    <Compile Include="Game\Wheel.cs" />
+    <Compile Include="GUI\AligmentEnum.cs" />
+    <Compile Include="GUI\Button.cs" />
+    <Compile Include="GUI\CheckBox.cs" />
+    <Compile Include="GUI\DragDropPanel.cs" />
+    <Compile Include="GUI\Font.cs" />
+    <Compile Include="GUI\FontCreator.cs" />
+    <Compile Include="GUI\GameUI.cs" />
+    <Compile Include="GUI\IDrawebleContextSolver.cs" />
+    <Compile Include="GUI\Panel.cs" />
+    <Compile Include="GUI\Point.cs" />
+    <Compile Include="GUI\RenderChar.cs" />
+    <Compile Include="GUI\TextAlgoritm.cs" />
+    <Compile Include="Parsers\WordsParser.cs" />
+    <Compile Include="Parsers\WtObjectParser.cs" />
+    <Compile Include="Projection.cs" />
+    <Compile Include="ResourceManagment\Resources.Arc.cs" />
+    <Compile Include="TaskTransleter.cs" />
+    <Compile Include="winapi64_portable.cs" />
+    <Compile Include="GUI\Widget.cs" />
+    <Compile Include="GUI\WidgetCollection.cs" />
+    <Compile Include="ISwither.cs" />
+    <Compile Include="OpenGL\BasicShaders.cs" />
+    <Compile Include="OpenGL\Camera.cs" />
+    <Compile Include="OpenGL\FraemBuffer.cs" />
+    <Compile Include="OpenGL\G.cs" />
+    <Compile Include="OpenGL\IDraweble.cs" />
+    <Compile Include="OpenGL\IGraphics.cs" />
+    <Compile Include="OpenGL\IShaderInstance.cs" />
+    <Compile Include="OpenGL\Material.cs" />
+    <Compile Include="OpenGL\Obj3DModel.cs" />
+    <Compile Include="OpenGL\Shader.cs" />
+    <Compile Include="OpenGL\ShaderProgram.cs" />
+    <Compile Include="OpenGL\SlowRender.cs" />
+    <Compile Include="OpenGL\Texture.cs" />
+    <Compile Include="OpenGL\TextureManager.cs" />
+    <Compile Include="OpenGL\Vertex.cs" />
+    <Compile Include="OpenGL\VertexObject.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceManagment\IResource.cs" />
+    <Compile Include="ResourceManagment\UnknownResource.cs" />
+    <Compile Include="ResourceManagment\Resources.cs" />
+    <Compile Include="ResourceManagment\Resources.Dir.cs" />
+    <Compile Include="Swither.cs" />
+    <Compile Include="UniColors.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="bin.eedata">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EmyEngine.JitterPhysics\EmyEngine.JitterPhysics.csproj">
+      <Project>{69b610da-009c-4b68-9eff-a0326c98c13a}</Project>
+      <Name>EmyEngine.JitterPhysics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EmyEngine.Platform\EmyEngine.Platform.csproj">
+      <Project>{c77500f2-9455-45ff-92f3-780c831e0a11}</Project>
+      <Name>EmyEngine.Platform</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
