@@ -12,7 +12,7 @@ namespace EmyEngine.OpenGL
     {
         public ShaderNew()
         {
-            Program = ShaderProgram.FromResources(EE.СurrentResources,"/shaders/new");
+            Program = ShaderProgram.FromSrcDir("./shaders/new");
 
             ViewLoc = Program.GetUniformLocation("View");
             BiasLoc = Program.GetUniformLocation("Bias");
@@ -102,7 +102,7 @@ namespace EmyEngine.OpenGL
     {
         public GUIShader()
         {
-            Program = ShaderProgram.FromResources(EE.СurrentResources, "/shaders/gui");
+            Program = ShaderProgram.FromSrcDir("./shaders/gui");
 
             ViewLoc = Program.GetUniformLocation("View");      
             ModelLoc = Program.GetUniformLocation("Model");
@@ -179,7 +179,7 @@ namespace EmyEngine.OpenGL
     {
         public ZShader()
         {
-            Program = ShaderProgram.FromResources(EE.СurrentResources, "/shaders/shadowshader");
+            Program = ShaderProgram.FromSrcDir( "./shaders/shadowshader");
             depthMVPLoc = Program.GetUniformLocation("depthMVP");
         }
         public int depthMVPLoc { get; private set; } = 0;

@@ -89,9 +89,9 @@ namespace EmyEngine.OpenGL
         {
             ShaderProgram shader = new ShaderProgram();
             Shader vs = new Shader(ShaderType.VertexShader);
-            vs.Compile(File.ReadAllText("./shaders/"+ name + "/shader.vs"));
+            vs.Compile(File.ReadAllText(name + "/shader.vs"));
             Shader fs = new Shader(ShaderType.FragmentShader);
-            fs.Compile(File.ReadAllText("./shaders/" + name + "/shader.fs"));
+            fs.Compile(File.ReadAllText(name + "/shader.fs"));
             shader.AttachShader(vs);
             shader.AttachShader(fs);
             shader.Link();

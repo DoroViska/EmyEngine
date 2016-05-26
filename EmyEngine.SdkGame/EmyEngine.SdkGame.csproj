@@ -56,6 +56,15 @@
     <None Include="bin0.eedata">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="shaders\gui\shader.vs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="shaders\new\shader.vs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="shaders\shadowshader\shader.vs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EmyEngine.JitterPhysics\EmyEngine.JitterPhysics.csproj">
@@ -66,6 +75,17 @@
       <Project>{f2c2609a-3200-4ff2-ad3b-930eae67c2e6}</Project>
       <Name>EmyEngine</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="shaders\gui\shader.fs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="shaders\new\shader.fs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="shaders\shadowshader\shader.fs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
