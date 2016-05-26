@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.TextEditor", "Mono.Tex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "textencoder", "textencoder\textencoder.csproj", "{D5968B80-69AB-4291-A65D-EBEEA7A5A3BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "packages", "packages\packages.csproj", "{C85BC9F0-7356-4037-BD24-2B03CD0D8904}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "packages_project", "packages_project\packages_project.csproj", "{C85BC9F0-7356-4037-BD24-2B03CD0D8904}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
