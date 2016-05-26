@@ -152,32 +152,42 @@ namespace EmyEngine.OpenGL
                     fsf.Refresh();
                     long old_ls_n = FuckFileHash(vsf);
                     long old_lf_n = FuckFileHash(fsf);
-                    bool opt = false;
-                    EE.CurentTransleter.PushTask( (a)=> 
+                    if (old_ls_n != old_ls || old_lf_n != old_lf)
                     {
-                        if (old_ls_n != old_ls)
+                         EE.CurentTransleter.PushTask( (a)=> 
                         {
-                            _shader.DetachShader(_vs);
-                            _vs = new Shader(ShaderType.VertexShader);
-                            _vs.Compile(File.ReadAllText(vsf.FullName));
-                            _shader.AttachShader(_vs);
-                            opt = true;
-                        }
-                        if (old_lf_n != old_lf)
-                        {
-                            _shader.DetachShader(_fs);
-                            _fs = new Shader(ShaderType.FragmentShader);
-                            _fs.Compile(File.ReadAllText(fsf.FullName));
-                            _shader.AttachShader(_fs);
-                            opt = true;
-                        }
-                        if (opt)
-                        {
-                            _shader.Link();
-                        }
-                    }, null);
 
-                    EE.CurentTransleter.Wait();
+                            _shader.DetachShader(_vs);
+                            _shader.DetachShader(_fs);
+
+                            _shader.ReleaseHandle();
+                            _shader.AcquireHandle();
+
+                            Shader _vst = new Shader(ShaderType.VertexShader);
+                            _vst.Compile(File.ReadAllText(vsf.FullName));
+                            _vs = _vst;
+
+                            Shader _fst = new Shader(ShaderType.FragmentShader);
+                            _fst.Compile(File.ReadAllText(fsf.FullName));
+                            _fs = _fst;
+
+                            _shader.AttachShader(_vst);
+                            _shader.AttachShader(_fst);
+
+                            
+                            _shader.Link();
+
+                            ErrorCode cod = GL.GetError();
+
+                            if (cod != ErrorCode.NoError)
+                                Console.WriteLine(cod);
+
+                        }, null);
+                        EE.CurentTransleter.Wait();
+
+
+                    }
+              
                     old_ls = old_ls_n;
                     old_lf = old_lf_n;
                  

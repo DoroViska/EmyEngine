@@ -76,9 +76,7 @@ namespace Parsers
         private static string Kd = "Kd";
         private static string Ks = "Ks";
 
-        private bool _isMtlParsed = false;
-        private bool _isObjParsed = false;
-
+    
         private WtMaterial _getMaterialFromName(string name)
         {
             for (int i = 0;i < Materials.Count; i++)

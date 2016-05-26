@@ -40,7 +40,7 @@ void main()
 	if(MAP_CMP(MapActivity,MAP_SPECULAR))	{ CSpecular *=  texture2D(SpecularMap,textcoords0); }
 
 	
-	vec3 LPos = vec3(28.4008,10.2799,28.6522);
+	vec3 LPos = vec3(10.0,10.0,10.0);
 	vec3 Normal_cameraspace = ( View  * vec4(normal0,0)).xyz; 
 	vec3 Position_worldspace = (Model * position0).xyz;
 	vec3 LightPosition_cameraspace = ( View * vec4(LPos,1)).xyz; 
@@ -69,9 +69,9 @@ void main()
 	
 	 
 	
-	vec4 color = (CAmbient) + 
+	vec4 color = (CAmbient / 10) + 
 				 (CDefuse * visibility*  LightColor * LightPower  * cosTheta / 1.0) + 
 				 (CSpecular* visibility * LightColor * LightPower * pow(cosAlpha,5));
-
+	color.a = CDefuse.a;
 	gl_FragColor = color;
 }
