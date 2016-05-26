@@ -137,14 +137,14 @@ namespace SdkGame
 
             //Lamps
             LightSource s = new LightSource();
-            s.Position = new Vector3(10f, 10f, 10f);
-            s.Attenuation = new Vector3(0.1f, 0.1f, 0.1f);
+            s.Position = new Vector3(100f, 100f, 100f);
+            s.Attenuation = new Vector3(0.2f, 0.2f, 0.2f);
             s.Colour = new Vector3(1f,1f,1f);
-            s.Exponent = 1.0f;
-            s.InnerCutoff = 0f;
-            s.OuterCutoff = 0f;
+            s.Exponent = 0.000f;
+            s.InnerCutoff = 100f;
+            s.OuterCutoff = 100f;
             s.Direction = new Vector3(0.0f, -1.0f, 0.0f);
-            s.Type = 0;
+            s.Type = 1;
             ((ShaderNew)_shader3DMain).AddLamp(s);
 
         }
