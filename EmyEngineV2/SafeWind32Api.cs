@@ -17,16 +17,8 @@ namespace EmyEngine
 
     }
     [Obsolete]
-    public static class _uitools_WINAPI_64
+    public static class SafeWind32Api
     {
-        private static bool issetup = setup_t();
-        private static bool setup_t()
-        {
-            EE.Log("setup_t:: WIN API Amulator setup: OK");
-            return true;
-        }
-
-
 
         public static bool IsRectEmpty(ref RECT rect)
         {

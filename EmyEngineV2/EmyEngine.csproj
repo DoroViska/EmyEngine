@@ -82,7 +82,7 @@
     <Compile Include="Projection.cs" />
     <Compile Include="ResourceManagment\Resources.Arc.cs" />
     <Compile Include="TaskTransleter.cs" />
-    <Compile Include="winapi64_portable.cs" />
+    <Compile Include="SafeWind32Api.cs" />
     <Compile Include="GUI\Widget.cs" />
     <Compile Include="GUI\WidgetCollection.cs" />
     <Compile Include="ISwither.cs" />

@@ -63,7 +63,7 @@ namespace EmyEngine.OpenGL
 
             RECT rz;
             rz.left = 0; rz.right = 0; rz.top = 0; rz.bottom = 0;
-            _uitools_WINAPI_64.IntersectRect(ref rz, ref a, ref e);
+            SafeWind32Api.IntersectRect(ref rz, ref a, ref e);
             Clip.lt.X = rz.left;
             Clip.lt.Y = rz.top;
             Clip.rb.X = rz.right;
