@@ -27,6 +27,8 @@ namespace EmyEngine.OpenGL
             SpecularMapLoc = Program.GetUniformLocation("SpecularMap");
             MapActivityLoc = Program.GetUniformLocation("MapActivity");
             ShadowMapLoc = Program.GetUniformLocation("ShadowMap");
+            NumLightLoc = Program.GetUniformLocation("NumLight");
+
         }
 
         public int ShadowMapObject { get; set; } = 0;
@@ -36,7 +38,7 @@ namespace EmyEngine.OpenGL
         public int ViewLoc { get; private set; } = 0;
         public int BiasLoc { get; private set; } = 0;
         public int ModelLoc { get; private set; } = 0;
-
+        public int NumLightLoc { get; private set; } = 0;
         public int ColorDefuseLoc { get; private set; } = 0;
         public int ColorAmbientLoc { get; private set; } = 0;
         public int ColorSpecularLoc { get; private set; } = 0;
@@ -47,6 +49,36 @@ namespace EmyEngine.OpenGL
 
         public int ShadowMapLoc { get; private set; } = 0;
         public bool EnableMaterials { get; set; } = true;
+
+
+        private List<LightSource> _lamps = new List<LightSource>();
+        public int LampsCount()
+        {
+            return _lamps.Count;
+        }
+        public void AddLamp(LightSource s)
+        {
+            _lamps.Add(s);
+            for (int i = 0;i< LampsCount();i++)
+            {
+                this.Program.Use();
+                GL.Uniform3(Program.GetUniformLocation("Light[" + i + "].Colour"), _lamps[i].Colour);
+                GL.Uniform3(Program.GetUniformLocation("Light[" + i + "].Direction"), _lamps[i].Direction);
+                GL.Uniform3(Program.GetUniformLocation("Light[" + i + "].Attenuation"), _lamps[i].Attenuation);
+                GL.Uniform3(Program.GetUniformLocation("Light[" + i + "].Position"), _lamps[i].Position);
+                GL.Uniform1(Program.GetUniformLocation("Light[" + i + "].InnerCutoff"), _lamps[i].InnerCutoff);
+                GL.Uniform1(Program.GetUniformLocation("Light[" + i + "].OuterCutoff"), _lamps[i].OuterCutoff);
+                GL.Uniform1(Program.GetUniformLocation("Light[" + i + "].Exponent"), _lamps[i].Exponent);
+                GL.Uniform1(Program.GetUniformLocation("Light[" + i + "].Type"), _lamps[i].Type);
+            }
+        }
+        public void RemoveLamp(LightSource s)
+        {
+            _lamps.Remove(s);
+        }
+
+
+
 
         public void UpdateState(Material Material)
         {
@@ -86,7 +118,7 @@ namespace EmyEngine.OpenGL
 
             }
 
-
+            GL.Uniform1(NumLightLoc, LampsCount());
             GL.Uniform1(DefuseMapLoc, 0);
             GL.Uniform1(AmbientMapLoc, 1);
             GL.Uniform1(SpecularMapLoc, 2);
@@ -121,6 +153,10 @@ namespace EmyEngine.OpenGL
 
             
         }
+
+     
+
+
 
         public int ShadowMapObject { get; set; } = 0;
         public ShaderProgram Program { set; get; }

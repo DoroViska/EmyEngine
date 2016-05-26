@@ -6,6 +6,22 @@
 #define MAP_CMP( var , def_ ) ((var & def_) == def_)
 
 
+struct LightSource
+{
+	int Type;
+	vec3 Position;
+	vec3 Attenuation;
+	vec3 Direction;
+	vec3 Colour;
+	float OuterCutoff;
+	float InnerCutoff;
+	float Exponent;
+};
+
+uniform int NumLight;
+uniform LightSource Light[10];
+
+
 uniform mat4 Projection;
 uniform mat4 Model;
 uniform mat4 View;
@@ -20,12 +36,13 @@ uniform sampler2D SpecularMap;
 uniform sampler2D ShadowMap;
 uniform int MapActivity;
 
-in vec4 position0;
-in vec3 normal0;
+
 in vec2 textcoords0;
 in vec4 ShadowCoord;
 
-
+in vec4 vWorldVertex;
+in vec3 vWorldNormal;
+in vec3 vViewVec;
 
 
 void main()
@@ -38,27 +55,8 @@ void main()
 	if(MAP_CMP(MapActivity,MAP_DEFUSE))		{ CDefuse *= texture2D(DefuseMap,textcoords0); }
 	if(MAP_CMP(MapActivity,MAP_AMBIENT))	{ CAmbient *=  texture2D(AmbientMap,textcoords0); }
 	if(MAP_CMP(MapActivity,MAP_SPECULAR))	{ CSpecular *=  texture2D(SpecularMap,textcoords0); }
-
 	
-	vec3 LPos = vec3(10.0,10.0,10.0);
-	vec3 Normal_cameraspace = ( View  * vec4(normal0,0)).xyz; 
-	vec3 Position_worldspace = (Model * position0).xyz;
-	vec3 LightPosition_cameraspace = ( View * vec4(LPos,1)).xyz; 
-	vec3 vertexPosition_cameraspace = ( View * Model * position0).xyz;
-	vec3 EyeDirection_cameraspace = vec3(0,0,0) - vertexPosition_cameraspace;
-	
-	vec3 l = normalize(LightPosition_cameraspace  + EyeDirection_cameraspace);
-	vec3 n = normalize(Normal_cameraspace);
-	vec3 E = normalize(EyeDirection_cameraspace);
-	vec3 R = reflect(-l,n);
-	
-	float LightPower  = 1.0;
-	//vec4 LightColor = vec4(1.0,1.0 / 255.0 * 220.0,1.0 / 255.0 * 115.0,1.0);
-	vec4 LightColor = vec4(1.0,1.0,1.0,1.0);
-	float cosTheta = clamp( dot( n,l ), 0.0,1.0);
-	float cosAlpha = clamp( dot( E,R ), 0.0,1.0);
-	
-	float bias = 0.001 * tan(acos(cosTheta)); 
+	float bias = 0.001; 
     bias = clamp(bias, 0.0,0.01);
 	float visibility = 1.0;
 
@@ -67,11 +65,39 @@ void main()
 		visibility = 0.01;
 	}
 	
-	 
+    vec3 normal = normalize(vWorldNormal);
+
+	vec3 colour = CAmbient.xyz;
+	for (int i = 0; i < NumLight; i++)
+	{
+		// Calculate diffuse term
+		vec3 lightVec = normalize(Light[i].Position - vWorldVertex.xyz);
+		float l = dot(normal, lightVec);
+		if ( l > 0.0 )
+		{
+			
+			// Calculate spotlight effect
+			float spotlight = 1.0;
+			if ( Light[i].Type == 1 )
+			{
+				spotlight = max(-dot(lightVec, Light[i].Direction), 0.0);
+				float spotlightFade = clamp((Light[i].OuterCutoff - spotlight) / (Light[i].OuterCutoff - Light[i].InnerCutoff), 0.0, 1.0);
+				spotlight = pow(spotlight * spotlightFade, Light[i].Exponent);
+			}
+			
+			// Calculate specular term
+			vec3 r = -normalize(reflect(lightVec, normal));
+			float s = pow(max(dot(r, vViewVec), 0.0), 10.0);
+			
+			// Calculate attenuation factor
+			float d = distance(vWorldVertex.xyz, Light[i].Position);
+			float a = 1.0 / (Light[i].Attenuation.x + (Light[i].Attenuation.y * d) + (Light[i].Attenuation.z * d * d));
+			
+			// Add to colour
+			colour += ((CDefuse.xyz * l) + (CSpecular.xyz * s)) * Light[i].Colour * a * spotlight;
+			
+		}
+	}
 	
-	vec4 color = (CAmbient / 10) + 
-				 (CDefuse * visibility*  LightColor * LightPower  * cosTheta / 1.0) + 
-				 (CSpecular* visibility * LightColor * LightPower * pow(cosAlpha,5));
-	color.a = CDefuse.a;
-	gl_FragColor = color;
+	gl_FragColor = vec4(colour * visibility, CDefuse.a);
 }
