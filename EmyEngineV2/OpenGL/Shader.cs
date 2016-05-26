@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace EmyEngine.OpenGL
 {
-    public sealed class Shader : IDisposable
+    public sealed class Shader
     {
-        private const int InvalidHandle = -1;
-
+        
         public int Handle { get; private set; }
         public ShaderType Type { get; private set; }
 
@@ -28,6 +27,7 @@ namespace EmyEngine.OpenGL
 
         public void Compile(string source)
         {
+            EE.Log("Shader Compiled {0}", Type);
             GL.ShaderSource(Handle, source);
             GL.CompileShader(Handle);
 
@@ -41,18 +41,12 @@ namespace EmyEngine.OpenGL
 
         private void ReleaseHandle()
         {
-            if (Handle == InvalidHandle)
+            if (Handle == 0)
                 return;
 
             GL.DeleteShader(Handle);
 
-            Handle = InvalidHandle;
-        }
-
-        public void Dispose()
-        {
-            ReleaseHandle();
-            GC.SuppressFinalize(this);
+            Handle = 0;
         }
 
         ~Shader()
