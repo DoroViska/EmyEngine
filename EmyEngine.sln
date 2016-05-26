@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.TextEditor", "Mono.Tex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "textencoder", "textencoder\textencoder.csproj", "{D5968B80-69AB-4291-A65D-EBEEA7A5A3BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "packages", "packages\packages.csproj", "{C85BC9F0-7356-4037-BD24-2B03CD0D8904}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +102,12 @@ Global
 		{D5968B80-69AB-4291-A65D-EBEEA7A5A3BC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D5968B80-69AB-4291-A65D-EBEEA7A5A3BC}.Standalone|Any CPU.ActiveCfg = Release|Any CPU
 		{D5968B80-69AB-4291-A65D-EBEEA7A5A3BC}.Standalone|Any CPU.Build.0 = Release|Any CPU
+		{C85BC9F0-7356-4037-BD24-2B03CD0D8904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C85BC9F0-7356-4037-BD24-2B03CD0D8904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C85BC9F0-7356-4037-BD24-2B03CD0D8904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C85BC9F0-7356-4037-BD24-2B03CD0D8904}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C85BC9F0-7356-4037-BD24-2B03CD0D8904}.Standalone|Any CPU.ActiveCfg = Release|Any CPU
+		{C85BC9F0-7356-4037-BD24-2B03CD0D8904}.Standalone|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
