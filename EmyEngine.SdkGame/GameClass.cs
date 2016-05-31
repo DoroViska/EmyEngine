@@ -101,7 +101,7 @@ namespace EmyEngine
             });
             t.IsBackground = true;
             t.Start();
-
+            test.Closing += (a,b) => { GC.Collect(); };
             test.Run(100, 100);
 
 

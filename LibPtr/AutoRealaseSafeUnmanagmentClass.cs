@@ -4,28 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EtoApp1.Desktop
+namespace LibPtr
 {
 
 
 
-    public static class AutoRealaseSafeUnmanagmentClassExtention
-    {
-        public static bool IsSucssesDisposed(this AutoRealaseSafeUnmanagmentClass current)
-        {
-            return current.DisposeStatus == DisposeInformation.Sucsses;
-        }
-
-        public static bool IsErrorDisposed(this AutoRealaseSafeUnmanagmentClass current)
-        {
-            return current.DisposeStatus == DisposeInformation.Error;
-        }
-
-        public static bool IsDisposed(this AutoRealaseSafeUnmanagmentClass current)
-        {
-            return current.DisposeStatus != DisposeInformation.Empty;
-        }
-    }
+   
 
     public abstract class AutoRealaseSafeUnmanagmentClass : IDisposebleStatus, IDisposable
     {
@@ -39,10 +23,18 @@ namespace EtoApp1.Desktop
         }
         
         private bool _isDisposed = false;
+        public bool IsDisposed {
+            set { _isDisposed = value; }
+            get{ return _isDisposed; }
+        }
+
+
+
         private DisposeInformation _disposeStatus = DisposeInformation.Empty;
         private void _suppress()
         {
-            _disposeStatus = RealaseHandle();
+            _disposeStatus = Realase();
+            Console.WriteLine(_disposeStatus);
         }
 
         public void Dispose()
@@ -56,8 +48,8 @@ namespace EtoApp1.Desktop
         }     
 
 
-        public abstract DisposeInformation RealaseHandle();
-        public abstract void LockHandle();
+        public abstract DisposeInformation Realase();
+        public abstract void Acquire();
 
         public DisposeInformation DisposeStatus
         {

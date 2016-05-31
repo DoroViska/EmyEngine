@@ -7,54 +7,19 @@ using System.Threading.Tasks;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK;
 using System.Runtime.InteropServices;
+using LibPtr;
 
 namespace EmyEngine.OpenGL
 {
-    public class VertexObject : IDraweble
+    public class VertexObject : AutoRealaseSafeUnmanagmentClass, IDraweble
     {
-        ~VertexObject()
-        {
-            if (GraphicsContext.CurrentContext != null && !GraphicsContext.CurrentContext.IsDisposed)
-            {
-
-                GL.DeleteVertexArray(VertexArrayObject);
-                GL.DeleteBuffer(PositionBufferObject);
-                GL.DeleteBuffer(NormalBufferObject);
-                GL.DeleteBuffer(TextureCoordsBufferObject);
-            }
-        }
+     
         public VertexObject() : this(PrimitiveType.Triangles) { }
         public VertexObject(PrimitiveType type)
         {
             DrawType = type;
-
-            VertexArrayObject = GL.GenVertexArray();
-            if(VertexArrayObject < 1)
-                throw new GLInstanceNotCreated();
-            GL.BindVertexArray(VertexArrayObject);
-
-            PositionBufferObject = GL.GenBuffer();
-            NormalBufferObject = GL.GenBuffer();
-            TextureCoordsBufferObject = GL.GenBuffer();
-            if (PositionBufferObject < 1 || NormalBufferObject < 1 || TextureCoordsBufferObject < 1)
-                throw new GLInstanceNotCreated();
-
-            GL.BindBuffer(BufferTarget.ArrayBuffer,PositionBufferObject);
-            GL.EnableVertexAttribArray(0);
-            GL.VertexAttribPointer(0,3,VertexAttribPointerType.Float,false,0,(IntPtr)0);
-         
-            GL.BindBuffer(BufferTarget.ArrayBuffer, NormalBufferObject);
-            GL.EnableVertexAttribArray(1);
-            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, 0, (IntPtr)0);
-
-            GL.BindBuffer(BufferTarget.ArrayBuffer, TextureCoordsBufferObject);
-            GL.EnableVertexAttribArray(2);
-            GL.VertexAttribPointer(2, 2, VertexAttribPointerType.Float, false, 0, (IntPtr)0);
-
-            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
-            GL.BindVertexArray(0);
-
-         
+            Acquire();
+        
         }
 
 
@@ -240,7 +205,51 @@ namespace EmyEngine.OpenGL
 
         }
 
-       
+        public override DisposeInformation Realase()
+        {
+            if (GraphicsContext.CurrentContext != null && !GraphicsContext.CurrentContext.IsDisposed)
+            {
+
+                GL.DeleteVertexArray(VertexArrayObject);
+                GL.DeleteBuffer(PositionBufferObject);
+                GL.DeleteBuffer(NormalBufferObject);
+                GL.DeleteBuffer(TextureCoordsBufferObject);
+            }
+            else
+                return DisposeInformation.Error;
+            return DisposeInformation.Sucsses;
+        }
+
+        public override void Acquire()
+        {
+            IsDisposed = false;
+            VertexArrayObject = GL.GenVertexArray();
+            if (VertexArrayObject < 1)
+                throw new GLInstanceNotCreated();
+            GL.BindVertexArray(VertexArrayObject);
+
+            PositionBufferObject = GL.GenBuffer();
+            NormalBufferObject = GL.GenBuffer();
+            TextureCoordsBufferObject = GL.GenBuffer();
+            if (PositionBufferObject < 1 || NormalBufferObject < 1 || TextureCoordsBufferObject < 1)
+                throw new GLInstanceNotCreated();
+
+            GL.BindBuffer(BufferTarget.ArrayBuffer, PositionBufferObject);
+            GL.EnableVertexAttribArray(0);
+            GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, 0, (IntPtr)0);
+
+            GL.BindBuffer(BufferTarget.ArrayBuffer, NormalBufferObject);
+            GL.EnableVertexAttribArray(1);
+            GL.VertexAttribPointer(1, 3, VertexAttribPointerType.Float, false, 0, (IntPtr)0);
+
+            GL.BindBuffer(BufferTarget.ArrayBuffer, TextureCoordsBufferObject);
+            GL.EnableVertexAttribArray(2);
+            GL.VertexAttribPointer(2, 2, VertexAttribPointerType.Float, false, 0, (IntPtr)0);
+
+            GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+            GL.BindVertexArray(0);
+
+        }
     }
 
 }

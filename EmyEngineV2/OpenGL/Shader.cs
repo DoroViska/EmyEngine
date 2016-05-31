@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibPtr;
 
 namespace EmyEngine.OpenGL
 {
-    public sealed class Shader
+    public sealed class Shader : AutoRealaseSafeUnmanagmentClass
     {
         
         public int Handle { get; private set; }
@@ -17,13 +18,10 @@ namespace EmyEngine.OpenGL
         public Shader(ShaderType type)
         {
             Type = type;
-            AcquireHandle();
+            Acquire();
         }
 
-        private void AcquireHandle()
-        {
-            Handle = GL.CreateShader(Type);
-        }
+
 
         public void Compile(string source)
         {
@@ -39,20 +37,24 @@ namespace EmyEngine.OpenGL
                 Console.WriteLine(GL.GetShaderInfoLog(Handle));
         }
 
-        private void ReleaseHandle()
+ 
+        public override DisposeInformation Realase()
         {
+            if (GraphicsContext.CurrentContext == null || GraphicsContext.CurrentContext.IsDisposed)
+                return DisposeInformation.Error;
             if (Handle == 0)
-                return;
+                return DisposeInformation.Error;
 
             GL.DeleteShader(Handle);
-
+      
             Handle = 0;
+            return DisposeInformation.Sucsses;
         }
 
-        ~Shader()
+        public override void Acquire()
         {
-            if (GraphicsContext.CurrentContext != null && !GraphicsContext.CurrentContext.IsDisposed)
-                ReleaseHandle();
+            IsDisposed = false;
+            Handle = GL.CreateShader(Type);
         }
     }
 }

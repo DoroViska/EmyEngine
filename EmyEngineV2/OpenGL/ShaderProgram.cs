@@ -8,9 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using EmyEngine.ResourceManagment;
 using System.Threading;
+using LibPtr;
+
 namespace EmyEngine.OpenGL
 {
-    public sealed class ShaderProgram : IDisposable
+    public sealed class ShaderProgram : AutoRealaseSafeUnmanagmentClass
     {
         private const int InvalidHandle = -1;
 
@@ -33,13 +35,10 @@ namespace EmyEngine.OpenGL
 
         public ShaderProgram()
         {
-            AcquireHandle();
+            Acquire();
         }
 
-        private void AcquireHandle()
-        {
-            Handle = GL.CreateProgram();
-        }
+  
 
         public void DetachShader(Shader shader)
         {
@@ -67,28 +66,7 @@ namespace EmyEngine.OpenGL
             GL.UseProgram(Handle);
         }
 
-        private void ReleaseHandle()
-        {
-            if (Handle == InvalidHandle)
-                return;
-
-            GL.DeleteProgram(Handle);
-
-            Handle = InvalidHandle;
-        }
-
-        public void Dispose()
-        {
-            ReleaseHandle();
-            GC.SuppressFinalize(this);
-        }
-
-        ~ShaderProgram()
-        {
-            if (GraphicsContext.CurrentContext != null && !GraphicsContext.CurrentContext.IsDisposed)
-                ReleaseHandle();
-        }
-
+        
 
 
 
@@ -160,8 +138,8 @@ namespace EmyEngine.OpenGL
                             _shader.DetachShader(_vs);
                             _shader.DetachShader(_fs);
 
-                            _shader.ReleaseHandle();
-                            _shader.AcquireHandle();
+                            _shader.Realase();
+                            _shader.Acquire();
 
                             Shader _vst = new Shader(ShaderType.VertexShader);
                             _vst.Compile(File.ReadAllText(vsf.FullName));
@@ -221,5 +199,26 @@ namespace EmyEngine.OpenGL
         }
 
 
+ 
+
+        public override DisposeInformation Realase()
+        {
+            if (GraphicsContext.CurrentContext == null || GraphicsContext.CurrentContext.IsDisposed)
+                return DisposeInformation.Error;
+
+            if (Handle == InvalidHandle)
+                return DisposeInformation.Error;
+
+            GL.DeleteProgram(Handle);
+
+            Handle = InvalidHandle;
+            return DisposeInformation.Sucsses;
+        }
+
+        public override void Acquire()
+        {
+            IsDisposed = false;
+            Handle = GL.CreateProgram();
+        }
     }
 }

@@ -126,6 +126,10 @@
       <Project>{c77500f2-9455-45ff-92f3-780c831e0a11}</Project>
       <Name>EmyEngine.Platform</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LibPtr\LibPtr.csproj">
+      <Project>{c3584bb5-6cdb-494d-b5de-63cef243d92e}</Project>
+      <Name>LibPtr</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

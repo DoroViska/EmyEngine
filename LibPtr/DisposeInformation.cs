@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EtoApp1.Desktop
+namespace LibPtr
 {
     
     public enum DisposeInformation

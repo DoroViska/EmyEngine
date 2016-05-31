@@ -41,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoRealaseSafeHandle.cs" />
+    <Compile Include="AutoRealaseSafeUnmanagmentClass.cs" />
+    <Compile Include="AutoRealaseSafeUnmanagmentClassExtention.cs" />
     <Compile Include="DisposeInformation.cs" />
     <Compile Include="IDisposebleStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

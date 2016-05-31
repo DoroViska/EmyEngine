@@ -1,4 +1,4 @@
-﻿namespace EtoApp1.Desktop
+﻿namespace LibPtr
 {
     public interface IDisposebleStatus
     {
