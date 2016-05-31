@@ -153,7 +153,7 @@ namespace EmyEngine.Game
             this.WheelTravel = 0.2f;
             //MAX SPEED
             this.MaximumAngularVelocity = 200f;
-            this.NumberOfRays = 5;
+            this.NumberOfRays = 1;
         }
 
         /// <summary>
@@ -376,7 +376,7 @@ namespace EmyEngine.Game
             torque += -fwdForce * Radius;
 
             // add force to car
-            car.AddForce(force, groundPos + 0.5f * JVector.Up);
+            car.AddForce(force * 2, groundPos + 0.5f * JVector.Up);
 
             // add force to the world
             if (!worldBody.IsStatic)

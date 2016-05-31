@@ -45,15 +45,16 @@ namespace EmyEngine.Game
          
             Body = new DefaultCar(this, chassis);
             Body.Mass = 1000f;
-            Body.Material.KineticFriction = 12400f;
-            Body.Material.StaticFriction = 12400f;
+           // Body.Material.Restitution = 2.0f;
+            Body.Material.KineticFriction = 0.1f;
+            Body.Material.StaticFriction = 0.1f;
 
             Wheel[] wheels = new Wheel[4];
-            wheels[(int)WheelPosition.FrontLeft] = new Wheel(Body, new JVector(0, -0.65f, 0.6f)  + (JVector.Left * 0.7f)  + 1.8f * JVector.Forward, 0.313f);
-            wheels[(int)WheelPosition.FrontRight] = new Wheel(Body, new JVector(0, -0.65f, 0.6f) + (JVector.Right * 0.7f) + 1.8f * JVector.Forward  , 0.313f);
+            wheels[(int)WheelPosition.FrontLeft] = new Wheel(Body, new JVector(0, -0.60f, 0.6f)  + (JVector.Left * 0.7f)  + 1.8f * JVector.Forward, 0.290f);
+            wheels[(int)WheelPosition.FrontRight] = new Wheel(Body, new JVector(0, -0.60f, 0.6f) + (JVector.Right * 0.7f) + 1.8f * JVector.Forward  , 0.290f);
 
-            wheels[(int)WheelPosition.BackLeft] = new Wheel(Body, new JVector(0, -0.65f, -0.7f) + (JVector.Left * 0.7f) + 1.8f * JVector.Backward  , 0.313f);
-            wheels[(int)WheelPosition.BackRight] = new Wheel(Body, new JVector(0, -0.65f, -0.7f) + (JVector.Right * 0.7f) + 1.8f * JVector.Backward  , 0.313f);
+            wheels[(int)WheelPosition.BackLeft] = new Wheel(Body, new JVector(0, -0.60f, -0.7f) + (JVector.Left * 0.7f) + 1.8f * JVector.Backward  , 0.290f);
+            wheels[(int)WheelPosition.BackRight] = new Wheel(Body, new JVector(0, -0.60f, -0.7f) + (JVector.Right * 0.7f) + 1.8f * JVector.Backward  , 0.290f);
           
             //угол поворта
             ((DefaultCar)Body).SteerAngle = 30;
