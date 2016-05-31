@@ -29,8 +29,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "textencoder", "textencoder\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "packages_project", "packages_project\packages_project.csproj", "{C85BC9F0-7356-4037-BD24-2B03CD0D8904}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoatArtist", "BoatArtist\BoatArtist.csproj", "{1503872E-DEF2-48D6-B1A1-6602AF045AF2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Eto", "Eto", "{C3F8F688-A625-44A4-95B4-847323BDFFD6}"
 	ProjectSection(SolutionItems) = preProject
 		Readme.txt = Readme.txt
@@ -45,6 +43,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eto.Gl.Windows", "Eto.Gl.Windows\Eto.Gl.Windows.csproj", "{A0DCCC13-936C-4D5A-AD8C-ADFF75816A8F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibPtr", "LibPtr\LibPtr.csproj", "{C3584BB5-6CDB-494D-B5DE-63CEF243D92E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotArtist", "BotArtist\BotArtist.csproj", "{1503872E-DEF2-48D6-B1A1-6602AF045AF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -125,12 +125,6 @@ Global
 		{C85BC9F0-7356-4037-BD24-2B03CD0D8904}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C85BC9F0-7356-4037-BD24-2B03CD0D8904}.Standalone|Any CPU.ActiveCfg = Release|Any CPU
 		{C85BC9F0-7356-4037-BD24-2B03CD0D8904}.Standalone|Any CPU.Build.0 = Release|Any CPU
-		{1503872E-DEF2-48D6-B1A1-6602AF045AF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1503872E-DEF2-48D6-B1A1-6602AF045AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1503872E-DEF2-48D6-B1A1-6602AF045AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1503872E-DEF2-48D6-B1A1-6602AF045AF2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1503872E-DEF2-48D6-B1A1-6602AF045AF2}.Standalone|Any CPU.ActiveCfg = Release|Any CPU
-		{1503872E-DEF2-48D6-B1A1-6602AF045AF2}.Standalone|Any CPU.Build.0 = Release|Any CPU
 		{510CE98D-2169-48A0-889C-E743417EE5E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{510CE98D-2169-48A0-889C-E743417EE5E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{510CE98D-2169-48A0-889C-E743417EE5E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -161,6 +155,12 @@ Global
 		{C3584BB5-6CDB-494D-B5DE-63CEF243D92E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C3584BB5-6CDB-494D-B5DE-63CEF243D92E}.Standalone|Any CPU.ActiveCfg = Release|Any CPU
 		{C3584BB5-6CDB-494D-B5DE-63CEF243D92E}.Standalone|Any CPU.Build.0 = Release|Any CPU
+		{1503872E-DEF2-48D6-B1A1-6602AF045AF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1503872E-DEF2-48D6-B1A1-6602AF045AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1503872E-DEF2-48D6-B1A1-6602AF045AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1503872E-DEF2-48D6-B1A1-6602AF045AF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1503872E-DEF2-48D6-B1A1-6602AF045AF2}.Standalone|Any CPU.ActiveCfg = Release|Any CPU
+		{1503872E-DEF2-48D6-B1A1-6602AF045AF2}.Standalone|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
