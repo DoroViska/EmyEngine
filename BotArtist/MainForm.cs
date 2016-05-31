@@ -2,9 +2,9 @@
 using Eto.Forms;
 using Eto.Drawing;
 using Eto.Gl;
-using EtoApp1.Desktop;
 
-namespace EtoApp1
+
+namespace BotArtist
 {
 
 
@@ -16,7 +16,7 @@ namespace EtoApp1
         {
             Title = "My Eto Form";
             ClientSize = new Size(400, 350);
-
+           
 
             sutface = new GLSurface();
             tabControl = new TabControl();
@@ -27,7 +27,7 @@ namespace EtoApp1
 
             sutface.GLDrawNow += Sutface_GLDrawNow;
             UITimer tm = new UITimer();
-            tm.Interval = 1f / 30;
+            tm.Interval = 1f / 0.7;
             tm.Start();    
             tm.Elapsed += Tm_Elapsed;
 

@@ -5,7 +5,8 @@ using Eto.Gl;
 using Eto.Gl.Windows;
 using OpenTK;
 
-namespace EtoApp1.Desktop
+
+namespace BotArtist
 {
     public class Program
     {
@@ -68,9 +69,14 @@ namespace EtoApp1.Desktop
                 }
 
             Application aplet = new Application(cur);
+            StartForm fm = new StartForm();
            
             MainForm frm = new MainForm();
-            aplet.Run(frm);
+
+            frm.Owner = fm;
+         
+
+            aplet.Run(fm);
            
 
 

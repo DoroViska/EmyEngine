@@ -34,7 +34,7 @@ namespace EmyEngine.OpenGL
 
             // Если произошла ошибка, выведем сообщение
             if (compileStatus == 0)
-                Console.WriteLine(GL.GetShaderInfoLog(Handle));
+                EE.Log(GL.GetShaderInfoLog(Handle));
         }
 
  
