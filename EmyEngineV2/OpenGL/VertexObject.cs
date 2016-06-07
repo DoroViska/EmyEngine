@@ -30,27 +30,13 @@ namespace EmyEngine.OpenGL
         public int TextureCoordsBufferObject { private set; get; }
         public Material Material = Material.Defult;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         public Vertex this[int index]
         {
             set
             {
-#if CHEK_ARRAYS
+
                 if (index >= Size || index < 0)
                     throw new IndexOutOfRangeException();
-#endif
                 Positions[index] = value.Position;
                 Normals[index] = value.Normal;
                 TextureCoords[index] = value.TextureCoords;
@@ -58,10 +44,8 @@ namespace EmyEngine.OpenGL
             }
             get
             {
-#if CHEK_ARRAYS
                 if (index >= Size || index < 0)
                     throw new IndexOutOfRangeException();
-#endif
                 Vertex onrez = new Vertex();
                 onrez.Position = Positions[index];
                 onrez.Normal = Normals[index];
@@ -75,29 +59,23 @@ namespace EmyEngine.OpenGL
 
         public void SetPosition(int index, Vector3 vc)
         {
-#if CHEK_ARRAYS
             if (index >= Size || index < 0)
                 throw new IndexOutOfRangeException();
-#endif
             this.Positions[index] = vc;
 
         }
         public void SetNormal(int index, Vector3 vc)
         {
-#if CHEK_ARRAYS
             if (index >= Size || index < 0)
                 throw new IndexOutOfRangeException();
-#endif
             this.Normals[index] = vc;
 
         }
 
         public void SetTextureCoord(int index, Vector2 vc)
         {
-#if CHEK_ARRAYS
             if (index >= Size || index < 0)
                 throw new IndexOutOfRangeException();
-#endif
             this.TextureCoords[index] = vc;
 
         }
@@ -165,11 +143,23 @@ namespace EmyEngine.OpenGL
                 this.TextureCoords = _toss;
             }
         }
-            
 
-
+        public int IndexOf(Vertex vert)
+        {
+            for (int i = 0; i < Size; i++)
+            {
+                if (this[i] == vert)
+                    return i;
+            }
+            return -1;
+        }
+        public void DeleteAt(Vertex s)
+        {
+            DeleteAt(IndexOf(s));
+        }
         public void DeleteAt(int idx)
         {
+            if (idx == -1) return;
             if (idx > (Size - 1))
                 throw new ArgumentOutOfRangeException();
             int blockSize = Size - 1 - idx;
