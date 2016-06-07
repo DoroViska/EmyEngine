@@ -123,10 +123,12 @@ namespace SdkGame
             EE.СurrentFont = new Font(reses, "/Arial_50");
             EE.CurentTransleter = new TaskTransleter();
             _fraemBufferMain = new FraemBuffer();
+            _rezultBuffer = new FraemBuffer(FramebufferAttachment.ColorAttachment0, 1000, 800);
             _decorations = new List<IDraweble>();
             _shaderGui = new GUIShader();
             _shaderZMain = new ZShader();
             _shader3DMain = new ShaderNew();
+
             ((ShaderNew) _shader3DMain).ShadowMapObject = _fraemBufferMain.DepthTextureObject;
 
             _instanceFromGame = new GameInstance();
@@ -147,14 +149,27 @@ namespace SdkGame
             s.Type = 1;
             ((ShaderNew)_shader3DMain).AddLamp(s);
 
+
+
+            //_glowBloom = new GlowBloomShader();
+           
+
+
+
+        }
+        FraemBuffer _rezultBuffer;
+        GlowBloomShader _glowBloom;
+        public class GlowBloomShader : IShaderInstance
+        {
+            public ShaderProgram Program {  set;    get; }
+
+            public void UpdateState(Material Material)
+            {
+                   
+            }
         }
 
-
-       
-
-
-
-
+    
 
 
 
@@ -167,12 +182,12 @@ namespace SdkGame
 
             //if (ts.IsButtonDown(MouseButton.Right))
             //    fly.UpdateState(Window, true);
+       
+                
+            using (_fraemBufferMain.Bind())
             {
-             
                 GL.CullFace(CullFaceMode.Front);
                 G.Instance = _shaderZMain;
-                _fraemBufferMain.Use();
-
                 GL.Viewport(0, 0, 8192, 8192);
                 GL.Clear(ClearBufferMask.DepthBufferBit);
 
@@ -208,49 +223,51 @@ namespace SdkGame
                 }
                 for (int i = 0; i < _instanceFromGame.Length; i++)
                 {
-                    _instanceFromGame[i].Draw();                  
-                }
-
-
-                
-
-                GL.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
-            }
-            {
-                GL.CullFace(CullFaceMode.Back);
-                G.Instance = _shader3DMain;
-
-                GL.Viewport(0, 0, widith , height);
-                GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
-
-                G.MatrixMode(MatrixType.Projection);
-                G.LoadIndenty();
-                G.MultMatrix(Matrix4.CreatePerspectiveFieldOfView((float)Math.PI / 4, (float)widith / (float)height * (float)1.0f, 0.1f, 1000f));
-
-
-                G.MatrixMode(MatrixType.View);
-                G.LoadIndenty();
-                G.MultMatrix(Matrix4.LookAt(10f, 5f, 10f, 0f, 0f, 0f, 0f, 1f, 0f));
-                //fly.MultMatrix();
-                G.MatrixMode(MatrixType.Model);
-                G.LoadIndenty();
-
-
-                //OnWindowClick.ButtonState(mL);
-                for (int i = 0; i < Decorations.Count; i++)
-                {
-                    Decorations[i].Draw();
-                }
-                for (int i = 0; i < _instanceFromGame.Length; i++)
-                {
                     _instanceFromGame[i].Draw();
-                    _instanceFromGame[i].Body.DebugDraw(_slowDebugDrawer);
-                }    
+                }
 
-                EE.CurentTransleter.Process();
             }
+
+
+            // using (_rezultBuffer.Bind())
+            //{
+            GL.CullFace(CullFaceMode.Back);
+            G.Instance = _shader3DMain;
+
+            GL.Viewport(0, 0, widith, height);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+
+
+            G.MatrixMode(MatrixType.Projection);
+            G.LoadIndenty();
+            G.MultMatrix(Matrix4.CreatePerspectiveFieldOfView((float)Math.PI / 4, (float)widith / (float)height * (float)1.0f, 0.1f, 1000f));
+
+
+            G.MatrixMode(MatrixType.View);
+            G.LoadIndenty();
+            G.MultMatrix(Matrix4.LookAt(10f, 5f, 10f, 0f, 0f, 0f, 0f, 1f, 0f));
+            //fly.MultMatrix();
+            G.MatrixMode(MatrixType.Model);
+            G.LoadIndenty();
+
+
+            //OnWindowClick.ButtonState(mL);
+            for (int i = 0; i < Decorations.Count; i++)
             {
+                Decorations[i].Draw();
+            }
+            for (int i = 0; i < _instanceFromGame.Length; i++)
+            {
+                _instanceFromGame[i].Draw();
+                _instanceFromGame[i].Body.DebugDraw(_slowDebugDrawer);
+            }
+
+            EE.CurentTransleter.Process();
+       
+
+            {
+
+
                 GL.Disable(EnableCap.LineSmooth);
                 G.Instance = _shaderGui;
                 G.MatrixMode(MatrixType.Projection);
@@ -263,7 +280,13 @@ namespace SdkGame
                 G.Clip = G.Clip2D.Indenty(widith, height);
                 _instanceFromGui.Draw();
                 GL.Enable(EnableCap.LineSmooth);
+
+
             }
+
+
+            
+         
             GraphicsContext.CurrentContext.SwapBuffers();
         }
         public void Update(float fps)

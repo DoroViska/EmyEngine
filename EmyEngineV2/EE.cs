@@ -46,8 +46,8 @@ namespace EmyEngine
         }
 
         
-        static TaskTransleter _curentTransleter = null;
-        public static TaskTransleter CurentTransleter
+        static ITaskTransleter _curentTransleter = null;
+        public static ITaskTransleter CurentTransleter
         {
             get
             {

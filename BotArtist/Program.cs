@@ -67,19 +67,20 @@ namespace BotArtist
                     cur = new Eto.GtkSharp.Platform();
                     cur.Add<GLSurface.IHandler>(() => new Eto.Gl.Gtk.GtkGlSurfaceHandler());
                 }
+            
+            aplet = new Application(cur);
+            
 
-            Application aplet = new Application(cur);
             StartForm fm = new StartForm();
-           
-            MainForm frm = new MainForm();
-
-            frm.Owner = fm;
+    
          
-
             aplet.Run(fm);
            
 
 
         }
+
+
+        public static Application aplet = null;
     }
 }

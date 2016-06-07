@@ -16,7 +16,7 @@ namespace EmyEngine
         public int bottom;
 
     }
-    [Obsolete]
+  
     public static class SafeWind32Api
     {
 

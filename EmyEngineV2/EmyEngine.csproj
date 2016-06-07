@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binderable.cs" />
     <Compile Include="ClickHandler.cs" />
     <Compile Include="DebugDrawer.cs" />
     <Compile Include="EE.cs" />
@@ -77,6 +78,9 @@
     <Compile Include="GUI\Point.cs" />
     <Compile Include="GUI\RenderChar.cs" />
     <Compile Include="GUI\TextAlgoritm.cs" />
+    <Compile Include="Binder.cs" />
+    <Compile Include="IBinderable.cs" />
+    <Compile Include="ITaskTransleter.cs" />
     <Compile Include="OpenGL\Light.cs" />
     <Compile Include="Parsers\WordsParser.cs" />
     <Compile Include="Parsers\WtObjectParser.cs" />

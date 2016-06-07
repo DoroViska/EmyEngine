@@ -82,6 +82,10 @@
     <Compile Include="StartForm.xeto.cs">
       <DependentUpon>StartForm.xeto</DependentUpon>
     </Compile>
+    <Compile Include="WindowTextView.cs" />
+    <Compile Include="WindowTextView.eto.cs">
+      <DependentUpon>WindowTextView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

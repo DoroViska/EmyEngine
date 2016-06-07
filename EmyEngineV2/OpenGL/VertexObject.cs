@@ -13,13 +13,13 @@ namespace EmyEngine.OpenGL
 {
     public class VertexObject : AutoRealaseSafeUnmanagmentClass, IDraweble
     {
-     
+
         public VertexObject() : this(PrimitiveType.Triangles) { }
         public VertexObject(PrimitiveType type)
         {
             DrawType = type;
             Acquire();
-        
+
         }
 
 
@@ -28,16 +28,29 @@ namespace EmyEngine.OpenGL
         public int PositionBufferObject { private set; get; }
         public int NormalBufferObject { private set; get; }
         public int TextureCoordsBufferObject { private set; get; }
-
-
         public Material Material = Material.Defult;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public Vertex this[int index]
         {
             set
             {
+#if CHEK_ARRAYS
                 if (index >= Size || index < 0)
                     throw new IndexOutOfRangeException();
+#endif
                 Positions[index] = value.Position;
                 Normals[index] = value.Normal;
                 TextureCoords[index] = value.TextureCoords;
@@ -45,8 +58,10 @@ namespace EmyEngine.OpenGL
             }
             get
             {
+#if CHEK_ARRAYS
                 if (index >= Size || index < 0)
                     throw new IndexOutOfRangeException();
+#endif
                 Vertex onrez = new Vertex();
                 onrez.Position = Positions[index];
                 onrez.Normal = Normals[index];
@@ -55,73 +70,143 @@ namespace EmyEngine.OpenGL
 
             }
         }
-        public int Size = 0;
-        Vector3[] Positions = new Vector3[0];
-        Vector3[] Normals = new Vector3[0];
-        Vector2[] TextureCoords = new Vector2[0];
-        public PrimitiveType DrawType { set; get; }
 
-        public void SetPosition(int index,Vector3 vc)
-        {         
+
+
+        public void SetPosition(int index, Vector3 vc)
+        {
+#if CHEK_ARRAYS
             if (index >= Size || index < 0)
                 throw new IndexOutOfRangeException();
+#endif
             this.Positions[index] = vc;
 
         }
         public void SetNormal(int index, Vector3 vc)
         {
+#if CHEK_ARRAYS
             if (index >= Size || index < 0)
                 throw new IndexOutOfRangeException();
+#endif
             this.Normals[index] = vc;
 
         }
 
         public void SetTextureCoord(int index, Vector2 vc)
         {
+#if CHEK_ARRAYS
             if (index >= Size || index < 0)
                 throw new IndexOutOfRangeException();
+#endif
             this.TextureCoords[index] = vc;
 
         }
 
-        public void PushArray(IEnumerable<Vertex> vertexes)
-        {
+        //public void PushArray(IEnumerable<Vertex> vertexes)
+        //{
 
-            this.Size = vertexes.Count();
-            Array.Resize(ref Positions, Size);
-            Array.Resize(ref Normals, Size);
-            Array.Resize(ref TextureCoords, Size);          
-            IEnumerator<Vertex> v = vertexes.GetEnumerator();
-            v.Reset();
-            for (int i = 0; v.MoveNext() ; i++)
+        //    this.Size = vertexes.Count();
+        //    Array.Resize(ref Positions, Size);
+        //    Array.Resize(ref Normals, Size);
+        //    Array.Resize(ref TextureCoords, Size);
+        //    IEnumerator<Vertex> v = vertexes.GetEnumerator();
+        //    v.Reset();
+        //    for (int i = 0; v.MoveNext(); i++)
+        //    {
+        //        this[i] = v.Current;
+        //    }
+        //}
+
+
+
+        //public void CaptResize(int size)
+        //{
+        //    Array.Resize(ref Positions, size);
+        //    Array.Resize(ref Normals, size);
+        //    Array.Resize(ref TextureCoords, size);
+        //}
+
+        //public void AppendVertexStore(Vertex vertex)
+        //{
+        //    Size++;
+        //    this[Size - 1] = vertex;
+        //}
+
+        //public void AppendVertex(Vertex vertex)
+        //{
+        //    Size++;
+        //    Array.Resize(ref Positions, Size);
+        //    Array.Resize(ref Normals, Size);
+        //    Array.Resize(ref TextureCoords, Size);
+        //    this[Size - 1] = vertex;
+        //}
+
+        public int Capacity
+        {
+            get
             {
-                this[i] = v.Current;
-            }        
+                if ((this.Positions.Length | this.TextureCoords.Length | this.Normals.Length) != this.Positions.Length)
+                    throw new Exception("Потеря синхронизации вершинного, текстурного и нормального буфера");
+                return this.Positions.Length;
+            }
+            set
+            {
+                if (value < Size)
+                    throw new Exception("Запас не может быть меньше размера текущего масива вершин");
+                Vector3[] _poss = new Vector3[value];
+                Vector3[] _noss = new Vector3[value];
+                Vector2[] _toss = new Vector2[value];
+
+                Array.Copy(this.Positions, _poss, Size);
+                Array.Copy(this.Normals, _noss, Size);
+                Array.Copy(this.TextureCoords, _toss, Size);
+                this.Positions = _poss;
+                this.Normals = _noss;
+                this.TextureCoords = _toss;
+            }
         }
+            
 
 
-
-        public void CaptResize(int size)
-        {       
-            Array.Resize(ref Positions, size);
-            Array.Resize(ref Normals, size);
-            Array.Resize(ref TextureCoords, size);
-        }
-
-        public void AppendVertexStore(Vertex vertex)
+        public void DeleteAt(int idx)
         {
-            Size++;       
-            this[Size - 1] = vertex;
+            if (idx > (Size - 1))
+                throw new ArgumentOutOfRangeException();
+            int blockSize = Size - 1 - idx;
+            int blockIdx = idx + 1;
+            Array.Copy(this.Positions, blockIdx, this.Positions, idx, blockSize);
+            Size--;
         }
 
+        private void ChekCapacity(int size)
+        {
+            if (size > Capacity)
+            {
+                Capacity = size;
+            }         
+        }
+        
+        
         public void AppendVertex(Vertex vertex)
-        {
+        {          
+            ChekCapacity(Size + 1);
+            Positions[Size] = vertex.Position;
+            Normals[Size] = vertex.Normal;
+            TextureCoords[Size] = vertex.TextureCoords;
             Size++;
-            Array.Resize(ref Positions,Size);
-            Array.Resize(ref Normals, Size);
-            Array.Resize(ref TextureCoords, Size);
-            this[Size - 1] = vertex;
         }
+
+
+
+
+
+        public int Size = 0;
+        Vector3[] Positions = new Vector3[0];
+        Vector3[] Normals = new Vector3[0];
+        Vector2[] TextureCoords = new Vector2[0];
+        public PrimitiveType DrawType { set; get; }
+
+
 
         bool ItsSaved = false;
         public void Save()

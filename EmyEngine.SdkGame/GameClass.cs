@@ -33,10 +33,12 @@ namespace EmyEngine
         {
 
 
-
+            int rl = 1000;
             GameWindow test = new GameWindow();
+            test.Width = rl;
+            test.Height = rl - 200;
             GameApplication bleat = null;
-
+      
 
             GameObjectJShape s = null;
             GameObjectJShape s1 = null;

@@ -87,7 +87,7 @@ namespace EmyEngine.OpenGL
                 if (group.Material.MapAmbient != null)
                     nobj.Material.AmbientMap = textures.GetResource<Texture>(textures_handle + group.Material.MapAmbient).TextureObject;
 
-                nobj.CaptResize(group.Faces.Count * 3);
+                nobj.Capacity = (group.Faces.Count * 3);
 
                 for (int i = 0;i < group.Faces.Count; i++)
                 {
@@ -96,19 +96,19 @@ namespace EmyEngine.OpenGL
                     vt.Position = Vector3(objparser.Vertexes[group.Faces[i].V0]);
                     vt.Normal = Vector3(objparser.Normals[group.Faces[i].VN0]);
                     vt.TextureCoords = Vector2(objparser.TextureCoords[group.Faces[i].VT0]);
-                    nobj.AppendVertexStore(vt);
+                    nobj.AppendVertex(vt);
            
               
                     vt.Position = Vector3(objparser.Vertexes[group.Faces[i].V1]);
                     vt.Normal = Vector3(objparser.Normals[group.Faces[i].VN1]);
                     vt.TextureCoords = Vector2(objparser.TextureCoords[group.Faces[i].VT1]);
-                    nobj.AppendVertexStore(vt);
+                    nobj.AppendVertex(vt);
 
                   
                     vt.Position = Vector3(objparser.Vertexes[group.Faces[i].V2]);
                     vt.Normal = Vector3(objparser.Normals[group.Faces[i].VN2]);
                     vt.TextureCoords = Vector2(objparser.TextureCoords[group.Faces[i].VT2]);
-                    nobj.AppendVertexStore(vt);
+                    nobj.AppendVertex(vt);
 
                 }
                 nobj.Save();

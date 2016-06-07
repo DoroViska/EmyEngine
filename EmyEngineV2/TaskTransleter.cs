@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EmyEngine
 {
-    public class TaskTransleter
+    public class TaskTransleter : ITaskTransleter
     {
         public TaskTransleter()
         {
