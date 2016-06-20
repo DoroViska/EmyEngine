@@ -44,10 +44,10 @@ namespace EmyEngine.Game
             CompoundShape chassis = new CompoundShape(subShapes);
          
             Body = new DefaultCar(this, chassis);
-            Body.Mass = 1000f;
+            Body.Mass = 800f;
            // Body.Material.Restitution = 2.0f;
-            Body.Material.KineticFriction = 0.1f;
-            Body.Material.StaticFriction = 0.1f;
+           /// Body.Material.KineticFriction = 0.1f;
+            Body.Material.StaticFriction = 2f;
 
             Wheel[] wheels = new Wheel[4];
             wheels[(int)WheelPosition.FrontLeft] = new Wheel(Body, new JVector(0, -0.60f, 0.6f)  + (JVector.Left * 0.7f)  + 1.8f * JVector.Forward, 0.290f);
@@ -57,7 +57,7 @@ namespace EmyEngine.Game
             wheels[(int)WheelPosition.BackRight] = new Wheel(Body, new JVector(0, -0.60f, -0.7f) + (JVector.Right * 0.7f) + 1.8f * JVector.Backward  , 0.290f);
           
             //угол поворта
-            ((DefaultCar)Body).SteerAngle = 30;
+            ((DefaultCar)Body).SteerAngle = 40;
             //крутящий момент
             ((DefaultCar)Body).DriveTorque = 30;
 

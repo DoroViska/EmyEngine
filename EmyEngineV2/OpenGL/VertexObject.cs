@@ -8,10 +8,15 @@ using OpenTK.Graphics.OpenGL4;
 using OpenTK;
 using System.Runtime.InteropServices;
 using LibPtr;
+using System.Collections;
+using System.ComponentModel;
 
 namespace EmyEngine.OpenGL
 {
-    public class VertexObject : AutoRealaseSafeUnmanagmentClass, IDraweble
+
+
+    [TypeConverter(typeof(VertexObjectConverter))]
+    public class VertexObject : AutoRealaseSafeUnmanagmentClass, IDraweble, IEnumerable, IEnumerable<Vertex>
     {
 
         public VertexObject() : this(PrimitiveType.Triangles) { }
@@ -79,45 +84,6 @@ namespace EmyEngine.OpenGL
             this.TextureCoords[index] = vc;
 
         }
-
-        //public void PushArray(IEnumerable<Vertex> vertexes)
-        //{
-
-        //    this.Size = vertexes.Count();
-        //    Array.Resize(ref Positions, Size);
-        //    Array.Resize(ref Normals, Size);
-        //    Array.Resize(ref TextureCoords, Size);
-        //    IEnumerator<Vertex> v = vertexes.GetEnumerator();
-        //    v.Reset();
-        //    for (int i = 0; v.MoveNext(); i++)
-        //    {
-        //        this[i] = v.Current;
-        //    }
-        //}
-
-
-
-        //public void CaptResize(int size)
-        //{
-        //    Array.Resize(ref Positions, size);
-        //    Array.Resize(ref Normals, size);
-        //    Array.Resize(ref TextureCoords, size);
-        //}
-
-        //public void AppendVertexStore(Vertex vertex)
-        //{
-        //    Size++;
-        //    this[Size - 1] = vertex;
-        //}
-
-        //public void AppendVertex(Vertex vertex)
-        //{
-        //    Size++;
-        //    Array.Resize(ref Positions, Size);
-        //    Array.Resize(ref Normals, Size);
-        //    Array.Resize(ref TextureCoords, Size);
-        //    this[Size - 1] = vertex;
-        //}
 
         public int Capacity
         {
@@ -189,15 +155,25 @@ namespace EmyEngine.OpenGL
 
 
 
-
-        public int Size = 0;
+        private int _size = 0;
+        public int Size
+        {
+            set
+            {
+                ChekCapacity(value);
+                _size = value;
+            }
+            get
+            {
+                return _size;
+            }
+        }
         Vector3[] Positions = new Vector3[0];
         Vector3[] Normals = new Vector3[0];
         Vector2[] TextureCoords = new Vector2[0];
         public PrimitiveType DrawType { set; get; }
 
-
-
+       
         bool ItsSaved = false;
         public void Save()
         {
@@ -324,6 +300,63 @@ namespace EmyEngine.OpenGL
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
             GL.BindVertexArray(0);
 
+        }
+
+        public class VertexObjectEnumerator : IEnumerator<Vertex>, IEnumerator
+        {
+            private VertexObject _object = null;
+
+            private int idx = 0;
+
+            private Vertex _cur;
+
+            public VertexObjectEnumerator(VertexObject _object)
+            {
+                this._object = _object;
+                this.idx = -1;
+            }
+
+            public Vertex Current
+            {
+                get { return _cur; }
+            }
+
+            object IEnumerator.Current
+            {
+                get { return _cur; }
+            }
+
+            public void Dispose()
+            {
+
+            }
+
+            public bool MoveNext()
+            {
+                idx++;
+                if (idx > _object.Size - 1)
+                    return false;
+                else
+                {
+                    _cur = _object[idx];
+                    return true;
+                }
+            }
+
+            public void Reset()
+            {
+                this.idx = -1;
+            }
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return new VertexObjectEnumerator(this);
+        }
+
+        IEnumerator<Vertex> IEnumerable<Vertex>.GetEnumerator()
+        {
+            return new VertexObjectEnumerator(this);
         }
     }
 

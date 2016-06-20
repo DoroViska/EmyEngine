@@ -153,7 +153,7 @@ namespace EmyEngine.Game
             this.WheelTravel = 0.2f;
             //MAX SPEED
             this.MaximumAngularVelocity = 200f;
-            this.NumberOfRays = 1;
+            this.NumberOfRays = 10;
         }
 
         /// <summary>

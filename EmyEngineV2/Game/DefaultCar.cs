@@ -93,7 +93,7 @@ namespace EmyEngine.Game
 
             this.Material.StaticFriction = 0.15f;
             this.Material.KineticFriction = 0.15f;
-            this.Material.Restitution = 0;
+            this.Material.Restitution = 0.1f;
 
 
             // create default wheels
@@ -120,7 +120,7 @@ namespace EmyEngine.Game
             {
                 //w.Inertia = 0.5f * (w.Radius * w.Radius) * mass;
                 //w.Spring = mass * new JVector(0f,-10f,0f).Length() / (w.WheelTravel * springFrac) * 0.8f;           
-                //w.Damping = 2.0f * (float)System.Math.Sqrt(w.Spring * this.Mass) * 0.25f * dampingFrac;
+               // w.Damping = 233.3f;
 
                 w.Inertia = 0.5f * (w.Radius * w.Radius) * mass;
                 w.Spring = mass * new JVector(0f, -10f, 0f).Length() / (w.WheelTravel * springFrac) * 0.3f;
