@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("textencoder")]
+[assembly: AssemblyTitle("EmyEngine.CrosCompress")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("textencoder")]
+[assembly: AssemblyProduct("EmyEngine.CrosCompress")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("d5968b80-69ab-4291-a65d-ebeea7a5a3bc")]
+[assembly: Guid("bd6690bc-1829-4a00-93c8-44c47c403ec7")]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
 //

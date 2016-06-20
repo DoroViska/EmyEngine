@@ -15,11 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmyEngine.CompoundEditor", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmyEngine.FontCreator", "EmyEngine.FontCreator\EmyEngine.FontCreator.csproj", "{491A2FE7-9D53-4870-A736-48A469A9E774}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "textencoder", "textencoder\textencoder.csproj", "{D5968B80-69AB-4291-A65D-EBEEA7A5A3BC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "packages_project", "packages_project\packages_project.csproj", "{C85BC9F0-7356-4037-BD24-2B03CD0D8904}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibPtr", "LibPtr\LibPtr.csproj", "{C3584BB5-6CDB-494D-B5DE-63CEF243D92E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmyEngine.CrosCompress", "EmyEngine.CrosCompress\EmyEngine.CrosCompress.csproj", "{BD6690BC-1829-4A00-93C8-44C47C403EC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,24 +62,18 @@ Global
 		{491A2FE7-9D53-4870-A736-48A469A9E774}.Release|Any CPU.Build.0 = Release|Any CPU
 		{491A2FE7-9D53-4870-A736-48A469A9E774}.Standalone|Any CPU.ActiveCfg = Release|Any CPU
 		{491A2FE7-9D53-4870-A736-48A469A9E774}.Standalone|Any CPU.Build.0 = Release|Any CPU
-		{D5968B80-69AB-4291-A65D-EBEEA7A5A3BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5968B80-69AB-4291-A65D-EBEEA7A5A3BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5968B80-69AB-4291-A65D-EBEEA7A5A3BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5968B80-69AB-4291-A65D-EBEEA7A5A3BC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D5968B80-69AB-4291-A65D-EBEEA7A5A3BC}.Standalone|Any CPU.ActiveCfg = Release|Any CPU
-		{D5968B80-69AB-4291-A65D-EBEEA7A5A3BC}.Standalone|Any CPU.Build.0 = Release|Any CPU
-		{C85BC9F0-7356-4037-BD24-2B03CD0D8904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C85BC9F0-7356-4037-BD24-2B03CD0D8904}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C85BC9F0-7356-4037-BD24-2B03CD0D8904}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C85BC9F0-7356-4037-BD24-2B03CD0D8904}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C85BC9F0-7356-4037-BD24-2B03CD0D8904}.Standalone|Any CPU.ActiveCfg = Release|Any CPU
-		{C85BC9F0-7356-4037-BD24-2B03CD0D8904}.Standalone|Any CPU.Build.0 = Release|Any CPU
 		{C3584BB5-6CDB-494D-B5DE-63CEF243D92E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C3584BB5-6CDB-494D-B5DE-63CEF243D92E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3584BB5-6CDB-494D-B5DE-63CEF243D92E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3584BB5-6CDB-494D-B5DE-63CEF243D92E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C3584BB5-6CDB-494D-B5DE-63CEF243D92E}.Standalone|Any CPU.ActiveCfg = Release|Any CPU
 		{C3584BB5-6CDB-494D-B5DE-63CEF243D92E}.Standalone|Any CPU.Build.0 = Release|Any CPU
+		{BD6690BC-1829-4A00-93C8-44C47C403EC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD6690BC-1829-4A00-93C8-44C47C403EC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD6690BC-1829-4A00-93C8-44C47C403EC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD6690BC-1829-4A00-93C8-44C47C403EC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD6690BC-1829-4A00-93C8-44C47C403EC7}.Standalone|Any CPU.ActiveCfg = Release|Any CPU
+		{BD6690BC-1829-4A00-93C8-44C47C403EC7}.Standalone|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
