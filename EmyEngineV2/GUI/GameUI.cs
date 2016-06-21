@@ -137,9 +137,9 @@ namespace EmyEngine.GUI
                     !CursorCollusion(fullpoint, new Point(parent.Width,parent.Height) + fullpoint, new Point(cur_x, cur_y), new Point(cur_x, cur_y))
                     )
                 {
-                    if (o.IsDraged == true)
+                    if (o.IsMouseMove == true)
                         o.OnMouseLeave();
-                    o.IsDraged = false;
+                    o.IsMouseMove = false;
 
                     if (o.IsMouseDown == true && !cur_statel)
                     {                       
@@ -155,9 +155,9 @@ namespace EmyEngine.GUI
 
                 CursorApot = true;
 
-                if (o.IsDraged == false)
+                if (o.IsMouseMove == false)
                     o.OnMouseMove();
-                o.IsDraged = true;
+                o.IsMouseMove = true;
 
                 if (cur_statel)
                 {
@@ -190,11 +190,11 @@ namespace EmyEngine.GUI
 
         public override void Paint(IDrawebleContextSolver context)
         {
-            IGraphics gp = context.CreateGraphics();
-            gp.Push();
+            //IGraphics gp = context.CreateGraphics();
+            //gp.Push();
          
 
-            gp.Pop();
+            //gp.Pop();
         }
 
         public override void Update(float TimeStep)

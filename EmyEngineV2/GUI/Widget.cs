@@ -73,7 +73,7 @@ namespace EmyEngine.GUI
         public bool IsVisable { set; get; } = true;
 
         public bool IsMouseDown { set; get; } = false;
-        public bool IsDraged{ set; get; } = false;
+        public bool IsMouseMove{ set; get; } = false;
 
         public event UIEventArgs Click;
         public virtual void OnClik() { if (Click != null) Click(this,EventArgs.Empty); }

@@ -49,7 +49,7 @@ namespace EmyEngine.GUI
             }
 
 
-            if (!this.IsDraged)
+            if (!this.IsMouseMove)
             {
                 gp.Material(Material.Gui);
                 gp.Push();
