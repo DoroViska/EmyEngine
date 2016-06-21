@@ -5,7 +5,6 @@ using System.Text;
 
 namespace EmyEngine
 {
-    
     public class Swither : ISwither
     {
         public event Action<Swither> SwithedToTrue;
@@ -27,6 +26,5 @@ namespace EmyEngine
             else
                 if (SwithedToFalse != null) SwithedToFalse(this);
         }
-
     }
 }

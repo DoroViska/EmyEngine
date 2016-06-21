@@ -13,14 +13,17 @@ using Jitter.LinearMath;
 
 namespace SdkGame
 {
-    public class MainForm : Panel
+    public class MainForm : GameUI
     {
         private GameApplication application;
+
+
+        public Label SelectionName { set; get; } = null;
+
         public MainForm(GameApplication apseApplication)
         {
             this.application = apseApplication;
 
-            this.IsDraweble = false;
 
 
 
@@ -32,6 +35,12 @@ namespace SdkGame
                 voxap.Height = 250;
                 {
                     int libe_pack = 10;
+                    {
+                        SelectionName = new Label();
+                        SelectionName.Text = "(NULL; -1)"; SelectionName.AutoSize();
+                        SelectionName.Position = new Point(10, libe_pack); libe_pack += 30;
+                        voxap.Items.Add(SelectionName);
+                    }
                     {
                         Button bt = new Button();
                         bt.Text = "Создать машину"; bt.AutoSize();
@@ -100,6 +109,7 @@ namespace SdkGame
                 voxap.Width = 300;
                 voxap.Height = 250;
                 {
+                    
                     int libe_pack = 10;
                     {
                         Button bt = new Button();

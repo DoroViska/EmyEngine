@@ -19,9 +19,8 @@ namespace EmyEngine.Game
 {
     public class NotSafeble : Attribute { }
     [NotSafeble]
-    public class GameObjectJShape : GameObject
+    public class ShapeObject : GameObject
     {
-
 
 
         static IDraweble spt;
@@ -30,7 +29,7 @@ namespace EmyEngine.Game
         static bool ModelsIneted = false;
 
 
-        public GameObjectJShape(Shape shape)
+        public ShapeObject(Shape shape)
         {
             sh = shape;
             if (!ModelsIneted)

@@ -26,6 +26,7 @@ namespace EmyEngine
     {
         public void DebugDraw(IDebugDrawer drawer)
         {
+            //std::op_code::bad_format_exception
             throw new __std_badOpCode_fromatException();
         }
     }

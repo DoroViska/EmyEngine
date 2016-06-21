@@ -13,14 +13,15 @@ using OpenTK.Input;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL4;
-
+using Jitter.Dynamics;
+using Jitter.LinearMath;
 
 namespace SdkGame
 {
     public class GameApplication
     {
         private GameInstance _instanceFromGame;
-        private GameUI _instanceFromGui;
+        private MainForm _instanceFromGui;
         private FraemBuffer _fraemBufferMain;
         private IShaderInstance _shaderGui;
         private IShaderInstance _shaderZMain;
@@ -59,14 +60,12 @@ namespace SdkGame
 
         // instances
         public GameInstance InstanceFromGame
-        {
-            set { _instanceFromGame = value; }
+        {     
             get { return _instanceFromGame; }
         }
 
         public GameUI InstanceFromGui
         {
-            set { _instanceFromGui = value; }
             get { return _instanceFromGui; }
         }
 
@@ -132,10 +131,9 @@ namespace SdkGame
             ((ShaderNew) _shader3DMain).ShadowMapObject = _fraemBufferMain.DepthTextureObject;
 
             _instanceFromGame = new GameInstance();
-            _instanceFromGui = new GameUI();
+            _instanceFromGui = new MainForm(this);
 
-            _forma = new MainForm(this);
-            _instanceFromGui.Items.Add(_forma);
+   
 
             //Lamps
             LightSource s = new LightSource();
@@ -163,7 +161,7 @@ namespace SdkGame
         {
             public ShaderProgram Program {  set;    get; }
 
-            public void UpdateState(Material Material)
+            public void UpdateState(EmyEngine.OpenGL.Material Material)
             {
                    
             }
@@ -176,9 +174,6 @@ namespace SdkGame
 
         public void Render(int widith, int height,int mX, int mY, bool mL)
         {
-
-            _instanceFromGui.Process(new Point(0, 0), widith, height, mX, mY, mL);
-            _instanceFromGui.ReversUpdate();
 
             //if (ts.IsButtonDown(MouseButton.Right))
             //    fly.UpdateState(Window, true);
@@ -263,9 +258,16 @@ namespace SdkGame
             }
 
             EE.CurentTransleter.Process();
-       
 
-            {
+            //GUI TARGETING
+            {          
+                if ((!_instanceFromGui.Process(new Point(0, 0), widith, height, mX, mY, mL)) && mL)
+                {
+                    TryToSelectObject(widith, height, mX, mY);
+                }
+
+                _instanceFromGui.ReversUpdate();
+         
 
 
                 GL.Disable(EnableCap.LineSmooth);
@@ -296,28 +298,33 @@ namespace SdkGame
         }
 
 
-        //    public static GameObject Selection = null;
+        public GameObject Selection = null;
 
-        //    private static void OnWindowClickOnPress(GameObject gameObject, bool b)
-        //    {
-        //        if(!b) return;
+        private void TryToSelectObject(int Window_Width, int Window_Height, int  m_b_X, int m_b_Y)
+        {
+            //Console.WriteLine("Try to selection Changed.");
+            try
+            {
+                Vector3 rayS = new Vector3();
+                Vector3 rayE = new Vector3();
+                Projection.PushRay(m_b_X /*- (Window_Width / 2)*/, m_b_Y /*- (Window_Height / 2)*/, Window_Width, Window_Height, ref rayS, ref rayE);
 
-        //        MouseState m_b = Mouse.GetState();
-        //        Vector3 rayS = new Vector3();
-        //        Vector3 rayE = new Vector3();
-        //        Projection.PushRay(m_b.X, m_b.Y, Window.Width, Window.Height, ref rayS, ref rayE);
+                //Console.WriteLine("{0}, {1}",rayS, rayE);
 
-
-        //        float flst = 0f;
-        //        JVector normal;
-        //        RigidBody body;
-        //        Inst.World.CollisionSystem.Raycast(EE.Vector(rayS), EE.Vector(rayE), (aa, ba, ca) => { return !aa.IsStatic; }, out body, out normal, out flst);
-
-        //        if (body != null)
-        //            Selection = (((ObjectivBody)body).BodyGameObject);
-
-
-        //    }
+                float flst = 0f;
+                JVector normal;
+                RigidBody body;
+                this.InstanceFromGame.World.CollisionSystem.Raycast(EE.Vector(rayS), EE.Vector(rayE), (aa, ba, ca) => true/*!aa.IsStatic*/ , out body, out normal, out flst);
+              
+                if (body != null)
+                {
+                    Selection = (((ObjectivBody)body).BodyGameObject);
+                    ((MainForm)this.InstanceFromGui).SelectionName.Text = Selection.Name;
+            
+                }
+           
+            } catch (Exception) { }             
+        }
 
 
 

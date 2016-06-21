@@ -82,9 +82,9 @@ namespace EmyEngine.GUI
      
         public void ReversUpdate()
         {
-            ReversUpdate(this.Items,new Point());
+            ReversUpdate(this.Items, new Point());
         }
-        public void ReversUpdate(WidgetCollection collection,Point startPoint)
+        public void ReversUpdate(WidgetCollection collection, Point startPoint)
         {
             for (int i = 0; i < collection.Count; i++)
             {
@@ -101,7 +101,7 @@ namespace EmyEngine.GUI
 
 
         
-        public bool Process(Point fullpoint, int window_width,int window_height,int cur_x,int cur_y, bool cur_statel,/*byte* key_sate,*/ Widget parent = null,List<Widget> Items = null)
+        public bool Process(Point fullpoint, int window_width,int window_height,int cur_x,int cur_y, bool cur_statel,/*byte* key_sate,*/ Widget parent = null, WidgetCollection Items = null)
         {
 
             bool CursorApot = false;
@@ -179,10 +179,6 @@ namespace EmyEngine.GUI
                         o.OnEndPush();
                     o.IsPushed = false;
                 }
-
-
-
-
 
             }
 

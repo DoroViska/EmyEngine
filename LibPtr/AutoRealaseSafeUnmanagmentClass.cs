@@ -33,7 +33,8 @@ namespace LibPtr
         private DisposeInformation _disposeStatus = DisposeInformation.Empty;
         private void _suppress()
         {
-            _disposeStatus = Realase();           
+            _disposeStatus = Realase();
+            Console.WriteLine($"Object Disposed {_disposeStatus}: {this}");       
         }
 
         public void Dispose()

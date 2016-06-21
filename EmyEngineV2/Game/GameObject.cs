@@ -24,18 +24,8 @@ namespace EmyEngine.Game
     {
     
         #region IDContenter        
-        public static uint NextID = 0;
-        private static object LookID = new object();
-        public static uint TakeID()
-        {
-            lock(LookID)
-            {
-                NextID++;
-                return NextID;
-            }      
-        }
-
-        public uint ID { get; private set; } = TakeID();
+        public static uint NextID = 0; 
+        public uint ID { get; private set; } = NextID++;
         #endregion
 
         #region overrides
@@ -61,7 +51,7 @@ namespace EmyEngine.Game
         public string Name { set; get; }
         public GameObject()
         {
-            this.Name = this.GetType().Name;
+            this.Name = "("  + this.GetType().Name + "; " + ID + ")";
         }
 
 

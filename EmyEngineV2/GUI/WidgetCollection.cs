@@ -11,7 +11,9 @@ namespace EmyEngine.GUI
         {
             this.UI = UI;
         }
+
         public Widget UI { private set; get; }
+
         public new void Add(Widget e)
         {
             base.Add(e);

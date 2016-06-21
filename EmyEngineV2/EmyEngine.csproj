@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Binderable.cs" />
+    <Compile Include="Bitmap.cs" />
     <Compile Include="ClickHandler.cs" />
     <Compile Include="DebugDrawer.cs" />
     <Compile Include="EE.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="GUI\FontCreator.cs" />
     <Compile Include="GUI\GameUI.cs" />
     <Compile Include="GUI\IDrawebleContextSolver.cs" />
+    <Compile Include="GUI\Label.cs" />
     <Compile Include="GUI\Panel.cs" />
     <Compile Include="GUI\Point.cs" />
     <Compile Include="GUI\RenderChar.cs" />

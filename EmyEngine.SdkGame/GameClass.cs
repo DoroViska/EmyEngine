@@ -40,8 +40,8 @@ namespace EmyEngine
             GameApplication bleat = null;
       
 
-            GameObjectJShape s = null;
-            GameObjectJShape s1 = null;
+            ShapeObject s = null;
+            ShapeObject s1 = null;
           
             test.Load += (sender, eventArgs) =>
             {
@@ -49,9 +49,9 @@ namespace EmyEngine
                 bleat.Initialize();
                
            
-                s = new GameObjectJShape(new BoxShape(new JVector(1f, 1f, 1f)));
+                s = new ShapeObject(new BoxShape(new JVector(1f, 1f, 1f)));
                 s.Position = new JVector(4f, 4f, 0f);
-                s1 = new GameObjectJShape(new BoxShape(new JVector(1f, 1f, 1f)));
+                s1 = new ShapeObject(new BoxShape(new JVector(1f, 1f, 1f)));
                 s1.Position = new JVector(4f, 4f, 2f);
 
                 PrismaticJoint e = new PrismaticJoint(bleat.InstanceFromGame.World,s.Body,s1.Body,0f, 0f);
@@ -68,47 +68,18 @@ namespace EmyEngine
                
 
             };
+
             test.RenderFrame += (sender, eventArgs) =>
-            {
-                
-               
-                bleat.Render(test.Width, test.Height, test.Mouse.X, test.Mouse.Y, test.Mouse[MouseButton.Left]);
-              
+            {                           
+                bleat.Render(test.Width, test.Height, test.Mouse.X, test.Mouse.Y, test.Mouse[MouseButton.Left]);           
             };
+
             test.UpdateFrame += (sender, eventArgs) =>
             {
                 bleat.Update(100);
             };
-         
-
-            SoftBody body = new SoftBody();
-            Thread t = new Thread(() =>
-            {
-                while (true)
-                {
-                    Console.ReadKey();
-                    Console.WriteLine("adders");
-
-                    string cmd = Console.ReadLine();
-                    if (cmd == "newb")
-                    {
-
-
-
-
-                    }
-
-                }
-
-            });
-            t.IsBackground = true;
-            t.Start();
-            test.Closing += (a,b) => { GC.Collect(); };
-            test.Run(100, 100);
-
-
-            
-
+        
+            test.Run(100, 60);
 
             // Window = new GameWindow();
             // Window.RenderFrame += WindowRenderFrame;

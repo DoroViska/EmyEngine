@@ -8,6 +8,7 @@ using OpenTK.Graphics.OpenGL4;
 using OpenTK;
 using System.IO;
 using EmyEngine.ResourceManagment;
+using LibPtr;
 #if SYSTEM_DRAWING
 using System.Drawing.Imaging;
 using System.Drawing;
@@ -19,7 +20,7 @@ using EmyEngine.Platform;
 
 namespace EmyEngine.OpenGL
 {
-    public class Texture : IResource
+    public class Texture : AutoRealaseSafeUnmanagmentClass, IResource
     {
         #region IResource
         public string Path { private set; get; }
@@ -29,8 +30,23 @@ namespace EmyEngine.OpenGL
             set { throw new NotImplementedException(); }
         }
         public Stream GetStream() { throw new NotImplementedException(); }
+
+        public override DisposeInformation Realase()
+        {
+            if (GraphicsContext.CurrentContext != null && !GraphicsContext.CurrentContext.IsDisposed)
+            {
+                GL.DeleteTexture(TextureObject);
+                return DisposeInformation.Sucsses;
+            }
+            return DisposeInformation.Error;
+        }
+
+        public override void Acquire()
+        {
+            TextureObject = GL.GenTexture();
+        }
         #endregion
-    
+
         public Texture(Stream file_t,string filename)
         {
             if (file_t == null)
@@ -40,9 +56,9 @@ namespace EmyEngine.OpenGL
             this.Path = filename;
             using (file_t)
             {
-              
-           
-                TextureObject = GL.GenTexture();
+
+
+                this.Acquire();
                 if (TextureObject < 1)
                     throw new GLInstanceNotCreated();
                 GL.BindTexture(TextureTarget.Texture2D, TextureObject);
@@ -56,7 +72,7 @@ namespace EmyEngine.OpenGL
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
-
+                
                 GL.BindTexture(TextureTarget.Texture2D, 0);
             }
      
@@ -68,15 +84,5 @@ namespace EmyEngine.OpenGL
         public int Widith { private set; get; }
         public int Height { private set; get; }
 
-
-        ~Texture()
-        {
-            if (GraphicsContext.CurrentContext != null && !GraphicsContext.CurrentContext.IsDisposed)
-            {
-                GL.DeleteTexture(TextureObject);             
-            }
-
-        }
-    
     }
 }
