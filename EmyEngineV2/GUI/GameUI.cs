@@ -68,7 +68,7 @@ namespace EmyEngine.GUI
         {
 
             DrawebleSolver.ZCounter = 0f;
-            for (int i = 0; i < Items.Count; i++)
+            for (int i = (Items.Count - 1); i >= 0; i--)
             {
                 Widget o = Items[i];
                 if (!o.IsVisable) continue;
@@ -101,8 +101,11 @@ namespace EmyEngine.GUI
 
 
         
-        public void Process(Point fullpoint, int window_width,int window_height,int cur_x,int cur_y, bool cur_statel,/*byte* key_sate,*/ Widget parent = null,List<Widget> Items = null)
+        public bool Process(Point fullpoint, int window_width,int window_height,int cur_x,int cur_y, bool cur_statel,/*byte* key_sate,*/ Widget parent = null,List<Widget> Items = null)
         {
+
+            bool CursorApot = false;
+
             if (parent == null)
                 parent = this;
             if (Items == null)
@@ -121,8 +124,11 @@ namespace EmyEngine.GUI
                 o.CursorPosition = new Point(cur_x,cur_y);
                 if (!o.IsVisable)
                     continue;
-        
-              
+
+                if (o is Panel)
+                {
+                    CursorApot = CursorApot || this.Process(fullpoint, o.Width, o.Height, cur_x, cur_y, cur_statel, /*key_sate,*/o, ((Panel)o).Items);
+                }
 
                 if (
                     !CursorCollusion(fullpoint + o.Position, fullpoint + o.PositionMax, new Point(cur_x, cur_y), new Point(cur_x, cur_y))
@@ -142,7 +148,11 @@ namespace EmyEngine.GUI
                     else
                         continue;              
                 }
-                                                     
+
+                if (CursorApot)
+                    continue;
+
+                CursorApot = true;
 
                 if (o.IsDraged == false)
                     o.OnMove();
@@ -152,6 +162,11 @@ namespace EmyEngine.GUI
                 {
                     if (o.IsPushed == false)
                     {
+                        Widget tmp = Items[0];
+                        Items[0] = Items[i];
+                        Items[i] = tmp;
+
+
                         o.OnStartPush();
                         o.UI.Selected = o;
                     }
@@ -167,18 +182,11 @@ namespace EmyEngine.GUI
 
 
 
-                if (o is Panel)
-                {
-                    this.Process(fullpoint, o.Width, o.Height,  cur_x,  cur_y, cur_statel, /*key_sate,*/o,((Panel)o).Items);
-
-
-                }
-
 
 
             }
 
-
+            return CursorApot;
         }
 
 

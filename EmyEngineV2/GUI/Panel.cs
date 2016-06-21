@@ -62,7 +62,7 @@ namespace EmyEngine.GUI
 
             G.PushClip();
             G.MultClip(new G.Clip2D(this.DisplayPosition.Vector2() + new Vector2(1, 1), this.DisplayPositionMax.Vector2() - new Vector2(1, 1)));
-            for (int i = 0; i < Items.Count; i++)
+            for (int i = (Items.Count - 1); i >= 0; i--)
             {
                 Widget o = Items[i];
                 if (!o.IsVisable)
