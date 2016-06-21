@@ -27,11 +27,13 @@ namespace EmyEngine.GUI
 
                 RenderChar nchr = new RenderChar(paten.TextureObject, ushort.Parse(fname),paten.Widith,paten.Height);
                 CharArray[nchr.Code]=nchr;
+                this.Height = nchr.Height;
             }
             
         }
 
         public RenderChar[] CharArray { private set; get; } 
 
+        public int Height { get; private set; }
     }
 }

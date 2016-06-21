@@ -9,20 +9,21 @@ namespace EmyEngine.GUI
 {
     public class RenderChar
     {
+        public int TextureObject { private set; get; }
+
+        public ushort Code { private set; get; }
+
+        public int Widith { set; get; }
+
+        public int Height { set; get; }
+
         public RenderChar(int textureObject, ushort code, int widith, int height)
-        {
-            
-
-
+        {          
             TextureObject = textureObject;
             Code = code;
             Widith = widith;
             Height = height;
         }
-
-        public int TextureObject { private set; get; }
-        public ushort Code { private set; get; }
-        public int Widith { set; get; }
-        public int Height { set; get; }
+     
     }
 }

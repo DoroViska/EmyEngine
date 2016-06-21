@@ -195,7 +195,7 @@ namespace SdkGame
                         bt.Text = "Закрыть"; bt.AutoSize();
                         bt.Click += (sender, args) =>
                         {
-                            EE.Log("error for clsoe window");
+                            GameClass.test.Close();
                         };
                         bt.Position = new Point(10, libe_pack); libe_pack += 30;
                         voxap.Items.Add(bt);

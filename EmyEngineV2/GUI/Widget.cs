@@ -72,19 +72,19 @@ namespace EmyEngine.GUI
 
         public bool IsVisable { set; get; } = true;
 
-        public bool IsPushed { set; get; } = false;
+        public bool IsMouseDown { set; get; } = false;
         public bool IsDraged{ set; get; } = false;
 
         public event UIEventArgs Click;
         public virtual void OnClik() { if (Click != null) Click(this,EventArgs.Empty); }
-        public event UIEventArgs Move;
-        public virtual void OnMove() { if (Move != null) Move(this, EventArgs.Empty); }
-        public event UIEventArgs EndMove;
-        public virtual void OnEndMove() { if (EndMove != null) EndMove(this, EventArgs.Empty); }
-        public event UIEventArgs StartPush;
-        public virtual void OnStartPush() { if (StartPush != null) StartPush(this, EventArgs.Empty); }
-        public event UIEventArgs EndPush;
-        public virtual void OnEndPush() { OnClik(); if (EndPush != null) EndPush(this, EventArgs.Empty); }
+        public event UIEventArgs MouseMove;
+        public virtual void OnMouseMove() { if (MouseMove != null) MouseMove(this, EventArgs.Empty); }
+        public event UIEventArgs MouseLeave;
+        public virtual void OnMouseLeave() { if (MouseLeave != null) MouseLeave(this, EventArgs.Empty); }
+        public event UIEventArgs MouseDown;
+        public virtual void OnMouseDown() { if (MouseDown != null) MouseDown(this, EventArgs.Empty); }
+        public event UIEventArgs MouseUp;
+        public virtual void OnMouseUp() { OnClik(); if (MouseUp != null) MouseUp(this, EventArgs.Empty); }
 
 
 

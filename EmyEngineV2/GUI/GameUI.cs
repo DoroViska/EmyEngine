@@ -45,6 +45,7 @@ namespace EmyEngine.GUI
                 return G.Graphics;
             }
         }
+
         public IDrawebleContextSolver DrawebleSolver { private set; get; }
     
         public WidgetCollection Items { private set; get; } 
@@ -77,9 +78,9 @@ namespace EmyEngine.GUI
             }
             this.Paint(this.DrawebleSolver);
         }
+
         public Widget Selected { set; get; }
 
-     
         public void ReversUpdate()
         {
             ReversUpdate(this.Items, new Point());
@@ -137,13 +138,13 @@ namespace EmyEngine.GUI
                     )
                 {
                     if (o.IsDraged == true)
-                        o.OnEndMove();
+                        o.OnMouseLeave();
                     o.IsDraged = false;
 
-                    if (o.IsPushed == true && !cur_statel)
+                    if (o.IsMouseDown == true && !cur_statel)
                     {                       
-                        o.IsPushed = false;
-                        o.OnEndPush();                       
+                        o.IsMouseDown = false;
+                        o.OnMouseUp();                       
                     }
                     else
                         continue;              
@@ -155,29 +156,29 @@ namespace EmyEngine.GUI
                 CursorApot = true;
 
                 if (o.IsDraged == false)
-                    o.OnMove();
+                    o.OnMouseMove();
                 o.IsDraged = true;
 
                 if (cur_statel)
                 {
-                    if (o.IsPushed == false)
+                    if (o.IsMouseDown == false)
                     {
                         Widget tmp = Items[0];
                         Items[0] = Items[i];
                         Items[i] = tmp;
 
 
-                        o.OnStartPush();
+                        o.OnMouseDown();
                         o.UI.Selected = o;
                     }
                         
-                    o.IsPushed = true;
+                    o.IsMouseDown = true;
                 }
                 else
                 {
-                    if (o.IsPushed == true)
-                        o.OnEndPush();
-                    o.IsPushed = false;
+                    if (o.IsMouseDown == true)
+                        o.OnMouseUp();
+                    o.IsMouseDown = false;
                 }
 
             }

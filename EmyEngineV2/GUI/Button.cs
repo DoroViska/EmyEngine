@@ -29,7 +29,7 @@ namespace EmyEngine.GUI
         public override void Paint(IDrawebleContextSolver context)
         {
             IGraphics gp = context.CreateGraphics();
-            if (IsPushed == true)
+            if (IsMouseDown == true)
             {
                 gp.Material(Material.Gui);
                 gp.Push();

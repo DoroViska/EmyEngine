@@ -27,14 +27,14 @@ namespace EmyEngine
     public class GameClass
     {
 
-
+        public static GameWindow test = new GameWindow();
 
         static void Main(string[] args)
         {
 
 
             int rl = 1000;
-            GameWindow test = new GameWindow();
+           
             test.Width = rl;
             test.Height = rl - 200;
             GameApplication bleat = null;
@@ -42,13 +42,23 @@ namespace EmyEngine
 
             ShapeObject s = null;
             ShapeObject s1 = null;
-          
+
+           
             test.Load += (sender, eventArgs) =>
             {
+
+
                 bleat = new GameApplication();
                 bleat.Initialize();
-               
-           
+
+
+
+            
+
+               // test.WindowState = WindowState.Fullscreen;
+             
+
+
                 s = new ShapeObject(new BoxShape(new JVector(1f, 1f, 1f)));
                 s.Position = new JVector(4f, 4f, 0f);
                 s1 = new ShapeObject(new BoxShape(new JVector(1f, 1f, 1f)));
@@ -68,17 +78,36 @@ namespace EmyEngine
                
 
             };
+            int test_Mouse_Y = 0;
+            int test_Mouse_X = 0;
+            bool test_Mouse_State = false;
+            test.MouseMove += (a, t) =>
+            {
+                test_Mouse_X = t.X;
+                test_Mouse_Y = t.Y;
+               
+            };
+          
+
+            test.MouseDown += (a, t) =>
+            {
+                test_Mouse_State = true;
+            };
+            test.MouseUp += (a, t) =>
+            {
+                test_Mouse_State = false;
+            };
 
             test.RenderFrame += (sender, eventArgs) =>
             {                           
-                bleat.Render(test.Width, test.Height, test.Mouse.X, test.Mouse.Y, test.Mouse[MouseButton.Left]);           
+                bleat.Render(test.Width, test.Height, test_Mouse_X, test_Mouse_Y, test_Mouse_State);           
             };
 
             test.UpdateFrame += (sender, eventArgs) =>
             {
                 bleat.Update(100);
             };
-        
+
             test.Run(100, 60);
 
             // Window = new GameWindow();
