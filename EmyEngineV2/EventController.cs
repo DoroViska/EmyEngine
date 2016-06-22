@@ -10,7 +10,7 @@ using OpenTK.Input;
 //Данный код собран из ашмётков размазанного по стенке OpenTK
 namespace EmyEngine
 {
-    public class EventController
+    public class GameEventController
     {
 
 
@@ -36,8 +36,8 @@ namespace EmyEngine
 
         private bool _isLoaded;
 
-        public EventController() : this(100,100) { }
-        public EventController(float updatesFramesPerSecond,float renderFramesPerSecond)
+        public GameEventController() : this(100,100) { }
+        public GameEventController(float updatesFramesPerSecond,float renderFramesPerSecond)
         {
             if (updatesFramesPerSecond < 0.0 || updatesFramesPerSecond > 200.0)
                 throw new ArgumentOutOfRangeException("updatesFramesPerSecond", (object)updatesFramesPerSecond, "Parameter should be inside the range [0.0, 200.0]");

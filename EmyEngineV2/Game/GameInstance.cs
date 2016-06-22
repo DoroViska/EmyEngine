@@ -15,8 +15,11 @@ namespace EmyEngine.Game
     public class GameInstance
     {    
         private bool _debugDraweble = false;
-        private List<GameObject> _gameObjects { set; get; }
+
+        private List<GameObject> _gameObjects;
+
         public bool UsingMultiThreding { set; get; } 
+
         public GameObject this[int nindex]
         {
             get { return _gameObjects[nindex]; }
@@ -29,7 +32,6 @@ namespace EmyEngine.Game
 
 
         public int Length { get { return this._gameObjects.Count; } }
-
 
         public GameInstance()
         {
@@ -57,13 +59,11 @@ namespace EmyEngine.Game
         {
             this.World.SetIterations(iter, iter);
         }
+
         public void ProgramIterations(int iter,int imin)
         {
             this.World.SetIterations(iter, imin);
         }
-
-
-
 
         public void Update(float step)
         {
@@ -76,7 +76,6 @@ namespace EmyEngine.Game
            
         }
 
-   
         public void EnableDebugDraweble()
         {
             _debugDraweble = true;
@@ -85,6 +84,7 @@ namespace EmyEngine.Game
                 obj.Body.EnableDebugDraw = true;
             }
         }
+
         public void DisableDebugDraweble()
         {
             _debugDraweble = false;
@@ -94,11 +94,8 @@ namespace EmyEngine.Game
             }
         }
 
-    
-
-    
-
         public World World { private set; get;}
+
         public CollisionSystem WorldCollisionSystem { private set; get; }
 
         public void AddObjectOnlyDraw(GameObject obj)
@@ -107,6 +104,7 @@ namespace EmyEngine.Game
             _gameObjects.Add(obj);
             obj.AddedToInstance(this);
         }
+
         public void AddObject(GameObject obj)
         {
             if (obj == null)
@@ -123,6 +121,7 @@ namespace EmyEngine.Game
 
             obj.AddedToInstance(this);
         }
+
         public void RemoveObject(GameObject obj)
         {
             if (obj == null)

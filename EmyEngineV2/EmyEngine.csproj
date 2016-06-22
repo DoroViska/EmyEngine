@@ -59,6 +59,7 @@
     <Compile Include="EventController.cs" />
     <Compile Include="Game\BoxObject.cs" />
     <Compile Include="Game\CarObject.cs" />
+    <Compile Include="Game\Constrate.cs" />
     <Compile Include="Game\DefaultCar.cs" />
     <Compile Include="Game\GameInstance.cs" />
     <Compile Include="Game\GameObject.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="ResourceManagment\Resources.cs" />
     <Compile Include="ResourceManagment\Resources.Dir.cs" />
     <Compile Include="Swither.cs" />
+    <Compile Include="TimeCompensator.cs" />
     <Compile Include="UniColors.cs" />
   </ItemGroup>
   <ItemGroup>

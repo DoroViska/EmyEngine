@@ -10,8 +10,7 @@ namespace EmyEngine.GUI
     {
         float ZCounter { set; get; }
         int GetWidth();
-        int GetHeight();
-        bool IsDraweble();
+        int GetHeight();     
         IGraphics CreateGraphics();
     }
 }
