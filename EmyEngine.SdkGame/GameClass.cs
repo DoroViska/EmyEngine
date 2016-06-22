@@ -107,7 +107,10 @@ namespace EmyEngine
             {
                 bleat.Update(100);
             };
-
+            test.Closed += (sender, eventArgs) =>
+            {
+                GC.SuppressFinalize(bleat);
+            };
             test.Run(100, 60);
 
             // Window = new GameWindow();
@@ -117,7 +120,11 @@ namespace EmyEngine
             //// wnd.WindowState = WindowState.Maximized;
             // Window.KeyDown += WindowKeyDown; ;
             // Window.Run(updates_in_one_second, updates_in_one_second);
+      
         }
+
+
+   
     }
 
     //    const int updates_in_one_second = 100;

@@ -83,6 +83,7 @@
     <Compile Include="Binder.cs" />
     <Compile Include="IBinderable.cs" />
     <Compile Include="ITaskTransleter.cs" />
+    <Compile Include="OpenGL\IGraphicsExtention.cs" />
     <Compile Include="OpenGL\Light.cs" />
     <Compile Include="OpenGL\VertexObjectConverter.cs" />
     <Compile Include="Parsers\WordsParser.cs" />

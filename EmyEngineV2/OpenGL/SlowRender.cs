@@ -211,43 +211,6 @@ namespace EmyEngine.OpenGL
         }
 
 
-        public void DrawRectangle(Vector3 leUp, Vector3 riDown)
-        {
-            float XL = riDown.X - leUp.X;
-            float YL = riDown.Y - leUp.Y;
-
-            DrawTriangle(
-                new Vector3(leUp.X, leUp.Y, leUp.Z),
-               new Vector3(leUp.X + XL, leUp.Y + YL, leUp.Z),
-                 new Vector3(leUp.X + XL, leUp.Y, leUp.Z)
-              //new Vector3(leUp.X + XL, leUp.Y, leUp.Z)
-              );
-
-
-            DrawTriangle(
-                 new Vector3(leUp.X, leUp.Y, leUp.Z),
-                 new Vector3(leUp.X, leUp.Y + YL, leUp.Z),
-                 new Vector3(leUp.X + XL, leUp.Y + YL, leUp.Z)
-                 //new Vector3(leUp.X + XL, leUp.Y, leUp.Z)
-                 );
-
-           
-        }
-
-
-        public void DrawSolidRectangle(Vector3 leUp, Vector3 riDown)
-        {
-            float XL = riDown.X - leUp.X;
-            float YL = riDown.Y - leUp.Y;
-
-            DrawSolidRectangle(
-                new Vector3(leUp.X, leUp.Y, leUp.Z),
-                new Vector3(leUp.X, leUp.Y + YL, leUp.Z),
-                new Vector3(leUp.X + XL, leUp.Y + YL, leUp.Z),
-                new Vector3(leUp.X + XL, leUp.Y, leUp.Z)
-                );
-        }
-
 
         //float XL = riDown.X - leUp.X;
         //float YL = riDown.Y - leUp.Y;
@@ -257,7 +220,7 @@ namespace EmyEngine.OpenGL
         //            GL.Vertex2(leUp.X + XL, leUp.Y + YL);
         //            GL.Vertex2(leUp.X, leUp.Y + YL);
         //            GL.Vertex2(leUp.X, leUp.Y);
-        public void Move(Vector3 v)
+        public void Translate(Vector3 v)
         {
             G.Translate(v);
         }
@@ -269,8 +232,28 @@ namespace EmyEngine.OpenGL
             this.DefuseColor(Color4.White);
             this.AmbientColor(color);
             G.Scale(fontSize,fontSize,fontSize);
-            TextAlgoritm.BaseTextRender(text,(Font)currentFont);
+            TextAlgoritm.BaseTextRender(text,(Font)currentFont, this);
             G.PopMatrix();
+        }
+
+        public void Scale(Vector3 v)
+        {
+            G.Scale(v.X,v.Y,v.Z);
+        }
+
+        public void PushClip()
+        {
+            G.PushClip();
+        }
+
+        public void PopClip()
+        {
+            G.PopClip();
+        }
+
+        public void MultClip(Vector2 lt, Vector2 rb)
+        {
+            G.MultClip(new G.Clip2D(lt, rb));
         }
     }
 }

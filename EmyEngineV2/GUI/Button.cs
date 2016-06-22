@@ -33,7 +33,7 @@ namespace EmyEngine.GUI
             {
                 gp.Material(Material.Gui);
                 gp.Push();
-                gp.Move(new Point(0,1).Vector3());
+                gp.Translate(new Point(0,1).Vector3());
                 gp.LineWidth = 1f;
                 gp.DefuseColor(Color4.Aqua);
                 gp.DrawRectangle(this.Position.Vector3(), this.PositionMax.Vector3());
@@ -53,7 +53,7 @@ namespace EmyEngine.GUI
             {
                 gp.Material(Material.Gui);
                 gp.Push();
-                gp.Move(new Point(0, 1).Vector3());
+                gp.Translate(new Point(0, 1).Vector3());
                 gp.LineWidth = 1f;
                 gp.DefuseColor(new Color4(0xF6, 0xF6, 0xF6, 0xFF));
                 gp.DrawRectangle(this.Position.Vector3(), this.PositionMax.Vector3());
@@ -78,7 +78,7 @@ namespace EmyEngine.GUI
             {
                 gp.Material(Material.Gui);
                 gp.Push();
-                gp.Move(new Point(0, 1).Vector3());
+                gp.Translate(new Point(0, 1).Vector3());
                 gp.LineWidth = 1f;
                 gp.DefuseColor(Color4.White);
                 gp.DrawRectangle(this.Position.Vector3(), this.PositionMax.Vector3());

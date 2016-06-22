@@ -38,7 +38,7 @@ namespace EmyEngine.GUI
             return renderOffsetX;
 
         }
-        public static void BaseTextRender(string text1, Font font)
+        public static void BaseTextRender(string text1, Font font, IGraphics gp)
         {
             if (string.IsNullOrEmpty(text1))
                 return;
@@ -59,8 +59,8 @@ namespace EmyEngine.GUI
 
                 {
                     RenderChar rnd = font.CharArray[(ushort)text1[i]];
-                    G.Graphics.DefuseMap(rnd.TextureObject);
-                    G.Graphics.DrawTexturedRectangle(
+                    gp.DefuseMap(rnd.TextureObject);
+                    gp.DrawTexturedRectangle(
                         new Vector3((float)(renderOffsetX + 0), (float)(renderOffsetY + 0), 0f),
                         new Vector2(-1.0f, 0.0f),
                         new Vector3((float)(renderOffsetX + 0), (float)(renderOffsetY + rnd.Height), 0f),

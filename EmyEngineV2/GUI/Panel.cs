@@ -58,10 +58,10 @@ namespace EmyEngine.GUI
                 gp.DrawSolidRectangle(this.Position.Vector3(), this.PositionMax.Vector3());
             
             }
-            gp.Move(this.Position.Vector3());
+            gp.Translate(this.Position.Vector3());
 
-            G.PushClip();
-            G.MultClip(new G.Clip2D(this.DisplayPosition.Vector2() + new Vector2(1, 1), this.DisplayPositionMax.Vector2() - new Vector2(1, 1)));
+            gp.PushClip();
+            gp.MultClip(this.DisplayPosition.Vector2() + new Vector2(1, 1), this.DisplayPositionMax.Vector2() - new Vector2(1, 1));
             for (int i = (Items.Count - 1); i >= 0; i--)
             {
                 Widget o = Items[i];
@@ -69,7 +69,8 @@ namespace EmyEngine.GUI
                     continue;            
                 o.Paint(context);
             }
-            G.PopClip();
+           
+            gp.PopClip();
             gp.Pop();
 
 

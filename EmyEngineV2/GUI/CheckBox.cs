@@ -39,7 +39,7 @@ namespace EmyEngine.GUI
 
 
             gp.Push();
-            gp.Move(new Point(0, 1).Vector3());
+            gp.Translate(new Point(0, 1).Vector3());
             gp.Material(Material.Gui);
             gp.DefuseColor(Color4.White);
             gp.DrawRectangle(this.Position.Vector3(), this.PositionMax.Vector3());

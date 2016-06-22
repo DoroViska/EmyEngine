@@ -73,28 +73,42 @@ namespace EmyEngine.GUI
         public bool IsVisable { set; get; } = true;
 
         public bool IsMouseDown { set; get; } = false;
+
         public bool IsMouseMove{ set; get; } = false;
 
         public event UIEventArgs Click;
+
         public virtual void OnClik() { if (Click != null) Click(this,EventArgs.Empty); }
+
         public event UIEventArgs MouseMove;
+
         public virtual void OnMouseMove() { if (MouseMove != null) MouseMove(this, EventArgs.Empty); }
+
         public event UIEventArgs MouseLeave;
+
         public virtual void OnMouseLeave() { if (MouseLeave != null) MouseLeave(this, EventArgs.Empty); }
+
         public event UIEventArgs MouseDown;
+
         public virtual void OnMouseDown() { if (MouseDown != null) MouseDown(this, EventArgs.Empty); }
+
         public event UIEventArgs MouseUp;
+
         public virtual void OnMouseUp() { OnClik(); if (MouseUp != null) MouseUp(this, EventArgs.Empty); }
 
-
-
         public Widget Parent { set; get; } = null;
-        public int OldWidth { set; get; } = 0;
-        public int OldHeight { set; get; } = 0;
+    
         public int Width { set; get; } = 100;
+
         public int Height { set; get; } = 100;
+
         public int X { set; get; } = 0;
+
         public int Y { set; get; } = 0;
+
+
+        private int OldWidth { set; get; } = 0;
+        private int OldHeight { set; get; } = 0;
 
         private Point _displayPosition;
         public void SetFullPosition(Point t)
@@ -129,6 +143,7 @@ namespace EmyEngine.GUI
         public Point CursorPosition { set; get; }
 
         public abstract void Paint(IDrawebleContextSolver context);
+
         public virtual void Update(float TimeStep) {
 
             if (OldWidth == 0)
@@ -145,10 +160,8 @@ namespace EmyEngine.GUI
                 OldWidth = Parent.Width;
             }
             if (OldHeight != Parent.Height)
-            {
-                
-                   
-                    this.Resize(0, Parent.Height - OldHeight);
+            {            
+                this.Resize(0, Parent.Height - OldHeight);
                 
                 OldHeight = Parent.Height;
             }
