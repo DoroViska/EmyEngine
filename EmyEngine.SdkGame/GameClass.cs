@@ -21,6 +21,7 @@ using Jitter.LinearMath;
 using OpenTK.Input;
 using SdkGame;
 using OpenTK.Graphics.OpenGL4;
+using Jitter.Collision;
 
 namespace EmyEngine
 {
@@ -40,9 +41,7 @@ namespace EmyEngine
             GameApplication bleat = null;
       
 
-            ShapeObject s = null;
-            ShapeObject s1 = null;
-
+      
            
             test.Load += (sender, eventArgs) =>
             {
@@ -53,25 +52,50 @@ namespace EmyEngine
 
 
 
-            
-
-               // test.WindowState = WindowState.Fullscreen;
-             
 
 
-                s = new ShapeObject(new BoxShape(new JVector(1f, 1f, 1f)));
-                s.Position = new JVector(4f, 4f, 0f);
-                s1 = new ShapeObject(new BoxShape(new JVector(1f, 1f, 1f)));
-                s1.Position = new JVector(4f, 4f, 2f);
+                // test.WindowState = WindowState.Fullscreen;
 
-                PrismaticJoint e = new PrismaticJoint(bleat.InstanceFromGame.World,s.Body,s1.Body,0f, 0f);
+
+                List<JVector> spn = new List<JVector>();
+      
+
+                spn.Add(new JVector(- 0.50000f ,-0.50000f, 0.50000f));
+                spn.Add(new JVector(0.50000f, -0.50000f, 0.50000f));
+                spn.Add(new JVector(- 0.50000f, -0.50000f, -0.50000f));
+                spn.Add(new JVector(0.50000f, -0.50000f, -0.50000f));
+                spn.Add(new JVector(- 0.50000f, 0.50000f, 0.50000f));
+                spn.Add(new JVector(0.50000f, 0.50000f, 0.50000f));
+                spn.Add(new JVector(- 0.50000f, 0.50000f, -0.50000f));
+                spn.Add(new JVector(0.50000f, 0.50000f, -0.50000f));
+
+
+
+                List<TriangleVertexIndices> fus = new List<TriangleVertexIndices>();
                
-                
-                e.Activate();
-                
-            
-                bleat.InstanceFromGame.AddObject(s);
-                bleat.InstanceFromGame.AddObject(s1);
+                fus.Add(new TriangleVertexIndices(0, 2, 3));
+                fus.Add(new TriangleVertexIndices(3, 1, 0));
+                fus.Add(new TriangleVertexIndices(4, 5, 7));
+                fus.Add(new TriangleVertexIndices(7, 6, 4));
+
+                fus.Add(new TriangleVertexIndices(0, 1, 5));
+                fus.Add(new TriangleVertexIndices(5, 4, 0));
+                fus.Add(new TriangleVertexIndices(1, 3, 7));
+
+                fus.Add(new TriangleVertexIndices(7, 5, 1));
+                fus.Add(new TriangleVertexIndices(3, 2, 6));
+                fus.Add(new TriangleVertexIndices(6, 7, 3));
+
+                fus.Add(new TriangleVertexIndices(2, 0, 3));
+                fus.Add(new TriangleVertexIndices(4, 6, 2));
+
+
+                TriangleMeshShape s = new TriangleMeshShape(new Octree(spn, fus));
+               
+                ShapeObject fuck = new ShapeObject(s);
+                fuck.Position = new JVector(0f, 10f, 0f);
+
+                //bleat.InstanceFromGame.AddObject(fuck);
                 bleat.InstanceFromGame.AddObject(new PlatformObject());
 
 
