@@ -84,12 +84,14 @@
     <Compile Include="Binder.cs" />
     <Compile Include="IBinderable.cs" />
     <Compile Include="ITaskTransleter.cs" />
+    <Compile Include="OpenGL\IDrawebleExtentions.cs" />
     <Compile Include="OpenGL\IGraphicsExtention.cs" />
     <Compile Include="OpenGL\Light.cs" />
     <Compile Include="OpenGL\VertexObjectConverter.cs" />
     <Compile Include="Parsers\WordsParser.cs" />
     <Compile Include="Parsers\WtObjectParser.cs" />
     <Compile Include="Projection.cs" />
+    <Compile Include="ResourceManagment\IResourceExtentions.cs" />
     <Compile Include="ResourceManagment\Resources.Arc.cs" />
     <Compile Include="TaskTransleter.cs" />
     <Compile Include="SafeWind32Api.cs" />

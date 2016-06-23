@@ -114,7 +114,7 @@ namespace SdkGame
             GL.Enable(EnableCap.CullFace);
             GL.Enable(EnableCap.ClipPlane0);
 
-
+            GL.ClearColor(1f / 255f * 55, 1f / 255f * 125, 1f / 255f * 185, 1f);
 
 
             EE.СurrentResources = reses;
@@ -167,9 +167,9 @@ namespace SdkGame
             }
         }
 
-    
 
 
+        public FlyingCamera Camera { set; get; } = new FlyingCamera();
 
 
         public void Render(int widith, int height,int mX, int mY, bool mL)
@@ -177,8 +177,9 @@ namespace SdkGame
 
             //if (ts.IsButtonDown(MouseButton.Right))
             //    fly.UpdateState(Window, true);
-       
-                
+            Camera.UpdateState(GameClass.TestWindow, GameClass.UseEscape);
+
+
             using (_fraemBufferMain.Bind())
             {
                 GL.CullFace(CullFaceMode.Front);
@@ -220,6 +221,11 @@ namespace SdkGame
                 {
                     _instanceFromGame[i].Draw();
                 }
+                G.PushMatrix();
+                G.Scale(1.1f, 1.1f, 1.1f);
+               // EE.СurrentResources.GetResource<IDraweble>("/models/Skys.obj").Draw();
+                G.PopMatrix();
+              
 
             }
 
@@ -240,11 +246,16 @@ namespace SdkGame
 
             G.MatrixMode(MatrixType.View);
             G.LoadIndenty();
-            G.MultMatrix(Matrix4.LookAt(10f, 5f, 10f, 0f, 0f, 0f, 0f, 1f, 0f));
-            //fly.MultMatrix();
+            //G.MultMatrix(Matrix4.LookAt(10f, 5f, 10f, 0f, 0f, 0f, 0f, 1f, 0f));
+            Camera.MultMatrix();
             G.MatrixMode(MatrixType.Model);
             G.LoadIndenty();
 
+            G.PushMatrix();
+            G.Scale(0.1f, 0.1f, 0.1f);
+            G.Translate(0f, 4f, 0f);
+            EE.СurrentResources.GetResource<IDraweble>("/models/Skys.obj").Draw();
+            G.PopMatrix();
 
             //OnWindowClick.ButtonState(mL);
             for (int i = 0; i < Decorations.Count; i++)
@@ -256,6 +267,9 @@ namespace SdkGame
                 _instanceFromGame[i].Draw();
                 _instanceFromGame[i].Body.DebugDraw(_slowDebugDrawer);
             }
+
+           
+
 
             EE.CurentTransleter.Process();
 

@@ -13,26 +13,8 @@ namespace EmyEngine.ResourceManagment
             this.Path = Path;
         }
   
-
-        public Stream GetStream()
-        {
-            return new MemoryStream(Data);
-        }
-
         public string Path { private set; get; }
-        public string Name
-        {
-            get
-            {
-               int ind = Path.LastIndexOf('/');
-               if(ind == -1)
-                    return  Path;
-               else
-                    return Path.Remove(0, ind + 1);
-            }
-        }
-
-
+      
         public byte[] Data  { set; get; }
 
 

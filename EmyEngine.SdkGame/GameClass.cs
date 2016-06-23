@@ -28,22 +28,25 @@ namespace EmyEngine
     public class GameClass
     {
 
-        public static GameWindow test = new GameWindow();
+        public static GameWindow TestWindow { set; get; } = new GameWindow();
 
-        static void Main(string[] args)
+        public static bool UseEscape { set; get; } = false;
+
+
+       static void Main(string[] args)
         {
 
 
             int rl = 1000;
            
-            test.Width = rl;
-            test.Height = rl - 200;
+            TestWindow.Width = rl;
+            TestWindow.Height = rl - 200;
             GameApplication bleat = null;
       
 
       
            
-            test.Load += (sender, eventArgs) =>
+            TestWindow.Load += (sender, eventArgs) =>
             {
 
 
@@ -105,37 +108,48 @@ namespace EmyEngine
             int test_Mouse_Y = 0;
             int test_Mouse_X = 0;
             bool test_Mouse_State = false;
-            test.MouseMove += (a, t) =>
+
+
+            TestWindow.MouseMove += (a, t) =>
             {
                 test_Mouse_X = t.X;
                 test_Mouse_Y = t.Y;
                
-            };
-          
-
-            test.MouseDown += (a, t) =>
+            };         
+            TestWindow.MouseDown += (a, t) =>
             {
-                test_Mouse_State = true;
+                if (t.Button == MouseButton.Left)
+                    test_Mouse_State = true;
+                if (t.Button == MouseButton.Right)
+                    UseEscape = true;
             };
-            test.MouseUp += (a, t) =>
+            TestWindow.MouseUp += (a, t) =>
             {
-                test_Mouse_State = false;
+                if (t.Button == MouseButton.Left)
+                    test_Mouse_State = false;
+                if (t.Button == MouseButton.Right)
+                    UseEscape = false;
             };
 
-            test.RenderFrame += (sender, eventArgs) =>
+
+            
+
+
+
+            TestWindow.RenderFrame += (sender, eventArgs) =>
             {                           
-                bleat.Render(test.Width, test.Height, test_Mouse_X, test_Mouse_Y, test_Mouse_State);           
+                bleat.Render(TestWindow.Width, TestWindow.Height, test_Mouse_X, test_Mouse_Y, test_Mouse_State);           
             };
 
-            test.UpdateFrame += (sender, eventArgs) =>
+            TestWindow.UpdateFrame += (sender, eventArgs) =>
             {
                 bleat.Update(100);
             };
-            test.Closed += (sender, eventArgs) =>
+            TestWindow.Closed += (sender, eventArgs) =>
             {
                 GC.SuppressFinalize(bleat);
             };
-            test.Run(100, 60);
+            TestWindow.Run(100, 60);
 
             // Window = new GameWindow();
             // Window.RenderFrame += WindowRenderFrame;

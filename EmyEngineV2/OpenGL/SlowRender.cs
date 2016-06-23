@@ -91,10 +91,9 @@ namespace EmyEngine.OpenGL
             _vrt.SetTextureCoord(2, tv2);
             _vrt.SetTextureCoord(3, tv3);
             _vrt.Save();
-            _vrt.DrawType = PrimitiveType.TriangleStrip;
             _vrt.Material = _curent_material;
-         
-            _vrt.Draw();
+
+            _vrt.Draw(PrimitiveType.TriangleStrip);
         }
         public void DrawRectangle(Vector3 v, Vector3 v1, Vector3 v2, Vector3 v3)
         {
@@ -106,10 +105,10 @@ namespace EmyEngine.OpenGL
             _vrt.SetPosition(2, v2);
             _vrt.SetPosition(3, v3);
             _vrt.Save();
-            _vrt.DrawType = PrimitiveType.TriangleStrip;
+   
             _vrt.Material = _curent_material;
-         
-            _vrt.Draw();
+
+            _vrt.Draw(PrimitiveType.TriangleStrip);
         }
 
         public void DrawTexturedTriangle(Vector3 v,Vector2 tv, Vector3 v1, Vector2 tv1,Vector3 v2, Vector2 tv2)
@@ -124,10 +123,10 @@ namespace EmyEngine.OpenGL
             _vrt.SetTextureCoord(1, tv1);
             _vrt.SetTextureCoord(2, tv2);
             _vrt.Save();
-            _vrt.DrawType = PrimitiveType.Triangles;
+       
             _vrt.Material = _curent_material;
-        
-            _vrt.Draw();
+
+            _vrt.Draw(PrimitiveType.Triangles);
         }
         public void DrawTriangle(Vector3 v,Vector3 v1,Vector3 v2)
         {
@@ -138,10 +137,10 @@ namespace EmyEngine.OpenGL
             _vrt.SetPosition(1, v1);
             _vrt.SetPosition(2, v2);
             _vrt.Save();
-            _vrt.DrawType = PrimitiveType.Triangles;
+   
             _vrt.Material = _curent_material;
-       
-            _vrt.Draw();
+
+            _vrt.Draw(PrimitiveType.Triangles);
         }
         public void DrawLine(Vector3 v, Vector3 v1)
         {
@@ -151,10 +150,10 @@ namespace EmyEngine.OpenGL
             _vrt.SetPosition(0, v);
             _vrt.SetPosition(1, v1);
             _vrt.Save();
-            _vrt.DrawType = PrimitiveType.Lines;
+          
             _vrt.Material = _curent_material;
-        
-            _vrt.Draw();
+
+            _vrt.Draw(PrimitiveType.Lines);
         }
         public void DrawPoint(Vector3 v)
         {
@@ -163,10 +162,10 @@ namespace EmyEngine.OpenGL
                 _vrt.SetNormal(i, _norml);
             _vrt.SetPosition(0, v);   
             _vrt.Save();
-            _vrt.DrawType = PrimitiveType.Points;
+        
             _vrt.Material = _curent_material;
-         
-            _vrt.Draw();
+
+            _vrt.Draw(PrimitiveType.Points);
         }
 
         public void Push()
@@ -189,10 +188,10 @@ namespace EmyEngine.OpenGL
             _vrt.SetPosition(2, v2);
             _vrt.SetPosition(3, v3);
             _vrt.Save();
-            _vrt.DrawType = PrimitiveType.LineLoop;
+            
             _vrt.Material = _curent_material;
-     
-            _vrt.Draw();
+
+            _vrt.Draw(PrimitiveType.LineLoop);
         }
 
         public void DrawSolidTriangle(Vector3 v, Vector3 v1, Vector3 v2)
@@ -204,10 +203,10 @@ namespace EmyEngine.OpenGL
             _vrt.SetPosition(1, v1);
             _vrt.SetPosition(2, v2);
             _vrt.Save();
-            _vrt.DrawType = PrimitiveType.LineStrip;
+  
             _vrt.Material = _curent_material;
          
-            _vrt.Draw();
+            _vrt.Draw(PrimitiveType.LineStrip);
         }
 
 

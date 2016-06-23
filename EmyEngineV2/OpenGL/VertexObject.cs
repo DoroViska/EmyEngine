@@ -19,12 +19,11 @@ namespace EmyEngine.OpenGL
     public class VertexObject : AutoRealaseSafeUnmanagmentClass, IDraweble, IEnumerable, IEnumerable<Vertex>
     {
 
-        public VertexObject() : this(PrimitiveType.Triangles) { }
-        public VertexObject(PrimitiveType type)
+    
+        public VertexObject()
         {
-            DrawType = type;
+ 
             Acquire();
-
         }
 
 
@@ -123,6 +122,7 @@ namespace EmyEngine.OpenGL
         {
             DeleteAt(IndexOf(s));
         }
+
         public void DeleteAt(int idx)
         {
             if (idx == -1) return;
@@ -131,10 +131,12 @@ namespace EmyEngine.OpenGL
             int blockSize = Size - 1 - idx;
             int blockIdx = idx + 1;
             Array.Copy(this.Positions, blockIdx, this.Positions, idx, blockSize);
+            Array.Copy(this.TextureCoords, blockIdx, this.TextureCoords, idx, blockSize);
+            Array.Copy(this.Normals, blockIdx, this.Normals, idx, blockSize);
             Size--;
         }
 
-        private void ChekCapacity(int size)
+        private void EnsureCapacity(int size)
         {
             if (size > Capacity)
             {
@@ -145,7 +147,7 @@ namespace EmyEngine.OpenGL
         
         public void AppendVertex(Vertex vertex)
         {          
-            ChekCapacity(Size + 1);
+            EnsureCapacity(Size + 1);
             Positions[Size] = vertex.Position;
             Normals[Size] = vertex.Normal;
             TextureCoords[Size] = vertex.TextureCoords;
@@ -160,7 +162,7 @@ namespace EmyEngine.OpenGL
         {
             set
             {
-                ChekCapacity(value);
+                EnsureCapacity(value);
                 _size = value;
             }
             get
@@ -171,7 +173,7 @@ namespace EmyEngine.OpenGL
         Vector3[] Positions = new Vector3[0];
         Vector3[] Normals = new Vector3[0];
         Vector2[] TextureCoords = new Vector2[0];
-        public PrimitiveType DrawType { set; get; }
+
 
        
         bool ItsSaved = false;
@@ -213,17 +215,6 @@ namespace EmyEngine.OpenGL
         }
 
 
-        public void Draw()
-        {
-            if(this.Size != 0 && this.VertexArrayObject != 0)
-            {
-                G.UpdateShader(this.Material);
-                GL.BindVertexArray(this.VertexArrayObject);
-                GL.DrawArrays(DrawType, 0, Size);
-                GL.BindVertexArray(0);
-            }
-           
-        }
 
 
         public void Draw(PrimitiveType rendertype)
@@ -235,12 +226,11 @@ namespace EmyEngine.OpenGL
                 GL.DrawArrays(rendertype, 0, Size);
                 GL.BindVertexArray(0);
             }
+
         }
 
         public void CalculateTrianglesNormals()
         {
-            if (DrawType != PrimitiveType.Triangles)
-                throw new Exception("Bad PrimitiveType: Нужен Трианжел");
             if((this.Size % 3) != 0)
                 throw new Exception("Bad Triangles Array: Сайз в говно");
 

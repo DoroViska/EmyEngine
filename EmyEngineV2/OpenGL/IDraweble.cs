@@ -9,7 +9,6 @@ namespace EmyEngine.OpenGL
 {
     public interface IDraweble
     {
-        void Draw();
         void Draw(PrimitiveType rendertype);
     }
 }

@@ -86,7 +86,7 @@ void main()
 		
 			if ( texture( ShadowMap, (ShadowCoord.xy/ShadowCoord.w) ).z  <   (ShadowCoord.z- bias)/ShadowCoord.w )
 			{	
-				visibility = 0.01;
+				visibility = 0.1;
 			}	
 
 			vec3 lightVec = normalize(Light[i].Position - (position0 * Model).xyz);

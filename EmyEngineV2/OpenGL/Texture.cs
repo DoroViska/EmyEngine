@@ -22,14 +22,10 @@ namespace EmyEngine.OpenGL
 {
     public class Texture : AutoRealaseSafeUnmanagmentClass, IResource
     {
-        #region IResource
+ 
         public string Path { private set; get; }
-        public byte[] Data
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
-        }
-        public Stream GetStream() { throw new NotImplementedException(); }
+
+        public byte[] Data { set; get;}
 
         public override DisposeInformation Realase()
         {
@@ -41,11 +37,13 @@ namespace EmyEngine.OpenGL
             return DisposeInformation.Error;
         }
 
+
         public override void Acquire()
         {
             TextureObject = GL.GenTexture();
         }
-        #endregion
+    
+
 
         public Texture(Stream file_t,string filename)
         {
@@ -54,6 +52,7 @@ namespace EmyEngine.OpenGL
             if (string.IsNullOrEmpty(filename))
                 throw new ArgumentNullException(nameof(filename));
             this.Path = filename;
+            this.Data = IResourceExtentions.GetStreamData(file_t);
             using (file_t)
             {
 

@@ -138,8 +138,8 @@ namespace EmyEngine.OpenGL
 
             }
 
-
-         
+            if (!use_mouse)
+                return;
             int xm = Mouse.GetCursorState().X;
             int ym = Mouse.GetCursorState().Y;
           
