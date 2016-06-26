@@ -16,7 +16,7 @@ namespace EmyEngine.OpenGL
 
 
     [TypeConverter(typeof(VertexObjectConverter))]
-    public class VertexObject : AutoRealaseSafeUnmanagmentClass, IDraweble, IEnumerable, IEnumerable<Vertex>
+    public class VertexObject : AutoRealaseSafeUnmanagmentClass, IDrawable, IEnumerable, IEnumerable<Vertex>
     {
 
     

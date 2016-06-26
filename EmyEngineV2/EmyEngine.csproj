@@ -58,7 +58,8 @@
     <Compile Include="Exceptions.cs" />
     <Compile Include="EventController.cs" />
     <Compile Include="Game\BoxObject.cs" />
-    <Compile Include="Game\CarObject.cs" />
+    <Compile Include="Game\CarObjectKamaz.cs" />
+    <Compile Include="Game\CarObjectPickUp.cs" />
     <Compile Include="Game\Constrate.cs" />
     <Compile Include="Game\DefaultCar.cs" />
     <Compile Include="Game\GameInstance.cs" />
@@ -84,7 +85,7 @@
     <Compile Include="Binder.cs" />
     <Compile Include="IBinderable.cs" />
     <Compile Include="ITaskTransleter.cs" />
-    <Compile Include="OpenGL\IDrawebleExtentions.cs" />
+    <Compile Include="OpenGL\IDrawableExtentions.cs" />
     <Compile Include="OpenGL\IGraphicsExtention.cs" />
     <Compile Include="OpenGL\Light.cs" />
     <Compile Include="OpenGL\VertexObjectConverter.cs" />
@@ -102,7 +103,7 @@
     <Compile Include="OpenGL\Camera.cs" />
     <Compile Include="OpenGL\FraemBuffer.cs" />
     <Compile Include="OpenGL\G.cs" />
-    <Compile Include="OpenGL\IDraweble.cs" />
+    <Compile Include="OpenGL\IDrawable.cs" />
     <Compile Include="OpenGL\IGraphics.cs" />
     <Compile Include="OpenGL\IShaderInstance.cs" />
     <Compile Include="OpenGL\Material.cs" />

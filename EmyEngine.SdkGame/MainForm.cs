@@ -25,12 +25,18 @@ namespace SdkGame
             this.application = apseApplication;
 
 
+            Panel Pul = new Panel();
+            Pul.Position = new Point(1, 0);
+            Pul.Width = GameClass.TestWindow.Width - 1;
+            Pul.Height = 30;
+            Pul.Anchor = Aligment.Right | Aligment.Left;
+            this.Items.Add(Pul);
 
 
 
             {
                 DragDropPanel voxap = new DragDropPanel();
-                voxap.Position = new Point(10, 15 + 250);
+                voxap.Position = new Point(10, 75 + 250);
                 voxap.Width = 200;
                 voxap.Height = 250;
                 {
@@ -43,11 +49,25 @@ namespace SdkGame
                     }
                     {
                         Button bt = new Button();
-                        bt.Text = "Создать машину"; bt.AutoSize();
+                        bt.Text = "Создать Камаз"; bt.AutoSize();
                         bt.Click += (sender, args) =>
                         {
 
-                            CarObject vs = new CarObject();
+                            CarObjectKamaz vs = new CarObjectKamaz();
+                            vs.Position = new JVector(0f, 4f, 0f);
+                            application.InstanceFromGame.AddObject(vs);
+
+                        };
+                        bt.Position = new Point(10, libe_pack); libe_pack += 30;
+                        voxap.Items.Add(bt);
+                    }
+                    {
+                        Button bt = new Button();
+                        bt.Text = "Создать Пикап"; bt.AutoSize();
+                        bt.Click += (sender, args) =>
+                        {
+
+                            CarObjectPickUp vs = new CarObjectPickUp();
                             vs.Position = new JVector(0f, 4f, 0f);
                             application.InstanceFromGame.AddObject(vs);
 
@@ -105,7 +125,7 @@ namespace SdkGame
 
             {
                 DragDropPanel voxap = new DragDropPanel();
-                voxap.Position = new Point(10, 10);
+                voxap.Position = new Point(10, 60);
                 voxap.Width = 300;
                 voxap.Height = 250;
                 {

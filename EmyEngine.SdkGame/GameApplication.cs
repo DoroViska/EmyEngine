@@ -28,7 +28,7 @@ namespace SdkGame
         private IShaderInstance _shader3DMain;
         private DebugDrawer _slowDebugDrawer;
         private MainForm _forma;
-        private List<IDraweble> _decorations; 
+        private List<IDrawable> _decorations; 
 
         // shaders/fbuffers
         public IShaderInstance Shader3DMain
@@ -83,7 +83,7 @@ namespace SdkGame
             get { return _forma; }
         }
 
-        public List<IDraweble> Decorations
+        public List<IDrawable> Decorations
         {
             get {  return _decorations; }
             set {  _decorations = value; }
@@ -123,7 +123,7 @@ namespace SdkGame
             EE.CurentTransleter = new TaskTransleter();
             _fraemBufferMain = new FraemBuffer();
             _rezultBuffer = new FraemBuffer(FramebufferAttachment.ColorAttachment0, 1000, 800);
-            _decorations = new List<IDraweble>();
+            _decorations = new List<IDrawable>();
             _shaderGui = new GUIShader();
             _shaderZMain = new ZShader();
             _shader3DMain = new ShaderNew();
@@ -241,7 +241,7 @@ namespace SdkGame
 
             G.MatrixMode(MatrixType.Projection);
             G.LoadIndenty();
-            G.MultMatrix(Matrix4.CreatePerspectiveFieldOfView((float)Math.PI / 4, (float)widith / (float)height * (float)1.0f, 0.1f, 1000f));
+            G.MultMatrix(Matrix4.CreatePerspectiveFieldOfView((float)Math.PI * 5 / 12, (float)widith / (float)height * (float)1.0f, 0.1f, 1000f));
 
 
             G.MatrixMode(MatrixType.View);
@@ -251,11 +251,14 @@ namespace SdkGame
             G.MatrixMode(MatrixType.Model);
             G.LoadIndenty();
 
-            G.PushMatrix();
-            G.Scale(0.1f, 0.1f, 0.1f);
-            G.Translate(0f, 4f, 0f);
-            EE.СurrentResources.GetResource<IDraweble>("/models/Skys.obj").Draw();
-            G.PopMatrix();
+            //G.PushMatrix();
+            //G.Scale(0.1f, 0.1f, 0.1f);
+            //G.Translate(0f, 4f, 0f);
+            //EE.СurrentResources.GetResource<IDraweble>("/models/Skys.obj").Draw();
+            //G.PopMatrix();
+
+            
+
 
             //OnWindowClick.ButtonState(mL);
             for (int i = 0; i < Decorations.Count; i++)

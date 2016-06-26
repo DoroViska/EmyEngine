@@ -22,7 +22,15 @@ namespace EmyEngine.Game
         /// <summary>Back left wheel.</summary>
         BackLeft,
         /// <summary>Back right wheel.</summary>
-        BackRight
+        BackRight,
+
+        Back1Left,
+        /// <summary>Back right wheel.</summary>
+        Back1Right,
+
+        Back2Left,
+        /// <summary>Back right wheel.</summary>
+        Back2Right
     }
 
     /// <summary>

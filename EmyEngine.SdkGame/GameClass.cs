@@ -22,6 +22,7 @@ using OpenTK.Input;
 using SdkGame;
 using OpenTK.Graphics.OpenGL4;
 using Jitter.Collision;
+using Jitter;
 
 namespace EmyEngine
 {
@@ -94,7 +95,8 @@ namespace EmyEngine
 
 
                 TriangleMeshShape s = new TriangleMeshShape(new Octree(spn, fus));
-               
+
+
                 ShapeObject fuck = new ShapeObject(s);
                 fuck.Position = new JVector(0f, 10f, 0f);
 

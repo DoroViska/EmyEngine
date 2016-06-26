@@ -23,9 +23,9 @@ namespace EmyEngine.Game
     {
 
 
-        static IDraweble spt;
-        static IDraweble bxt;
-        static IDraweble cyl;
+        static IDrawable spt;
+        static IDrawable bxt;
+        static IDrawable cyl;
         static bool ModelsIneted = false;
 
 
@@ -35,9 +35,9 @@ namespace EmyEngine.Game
             if (!ModelsIneted)
             {
               
-                spt = EE.СurrentResources.GetResource<IDraweble>("models/sphere.obj");
-                bxt = EE.СurrentResources.GetResource<IDraweble>("models/box.obj");
-                cyl = EE.СurrentResources.GetResource<IDraweble>("models/cylinder.obj");
+                spt = EE.СurrentResources.GetResource<IDrawable>("models/sphere.obj");
+                bxt = EE.СurrentResources.GetResource<IDrawable>("models/box.obj");
+                cyl = EE.СurrentResources.GetResource<IDrawable>("models/cylinder.obj");
                 ModelsIneted = true;
             }
             this.Body = new ObjectivBody(this,sh);

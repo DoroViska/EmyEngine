@@ -24,11 +24,10 @@ namespace EmyEngine.Game
     {
     
         #region IDContenter        
-        public static uint NextID = 0; 
+        private static uint NextID = 0; 
         public uint ID { get; private set; } = NextID++;
         #endregion
 
-        #region overrides
         public override bool Equals(object obj)
         {
             if (obj == null || !(obj is GameObject))
@@ -46,17 +45,16 @@ namespace EmyEngine.Game
         {
             return string.Format("GameObject: name = {0}, id = {1}, position = {2}", this.Name,this.ID,this.Body?.Position);
         }
-        #endregion
 
         public string Name { set; get; }
+
         public GameObject()
         {
             this.Name = "("  + this.GetType().Name + "; " + ID + ")";
         }
 
-
         public abstract void Draw();
-        //public abstract void TopologyDraw();
+
         public abstract void Update();
 
         public virtual void AddedToInstance(GameInstance instance)

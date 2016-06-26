@@ -16,11 +16,11 @@ namespace EmyEngine.Game
         {
             this.Body = new ObjectivBody(this, new BoxShape(new JVector(1f, 2f, 0.1f)));
             this.Body.IsStatic = false;
-            bxt = EE.СurrentResources.GetResource<IDraweble>("/models/wooddoor.obj");
+            bxt = EE.СurrentResources.GetResource<IDrawable>("/models/wooddoor.obj");
             this.Body.Mass = 40f;
         }
 
-        private IDraweble bxt = null;
+        private IDrawable bxt = null;
         public override void Draw()
         {
             G.PushMatrix();    
@@ -44,10 +44,10 @@ namespace EmyEngine.Game
             this.Body = new ObjectivBody(this, new BoxShape(new JVector(1f, 2f, 0.1f)));
             this.Body.IsStatic = false;
             this.Body.Mass = 60f;
-            bxt = EE.СurrentResources.GetResource<IDraweble>("/models/woodplank.obj");
+            bxt = EE.СurrentResources.GetResource<IDrawable>("/models/woodplank.obj");
         }
 
-        private IDraweble bxt = null;
+        private IDrawable bxt = null;
         public override void Draw()
         {
             G.PushMatrix();           
@@ -86,10 +86,10 @@ namespace EmyEngine.Game
         {
             this.Body = new ObjectivBody(this, new BoxShape(new JVector(10f, 1f, 8f)));
             this.Body.IsStatic = true;
-            bxt = EE.СurrentResources.GetResource<IDraweble>("/models/box.obj");
+            bxt = EE.СurrentResources.GetResource<IDrawable>("/models/box.obj");
         }
 
-        private IDraweble bxt = null;
+        private IDrawable bxt = null;
         public override void Draw()
         {
             G.PushMatrix();
@@ -112,10 +112,10 @@ namespace EmyEngine.Game
         {
             this.Body = new ObjectivBody(this, new BoxShape(new JVector(300f, 1f, 300f)));
             this.Body.IsStatic = true;
-            bxt = EE.СurrentResources.GetResource<IDraweble>("/models/box.obj");
+            bxt = EE.СurrentResources.GetResource<IDrawable>("/models/box.obj");
         }
 
-        private IDraweble bxt = null;
+        private IDrawable bxt = null;
         public override void Draw()
         {
             G.PushMatrix();
@@ -137,10 +137,10 @@ namespace EmyEngine.Game
         public BoxObject()
         {
             this.Body = new ObjectivBody(this,new BoxShape(new JVector(1f,1f,1f)));
-            bxt = EE.СurrentResources.GetResource<IDraweble>("/models/box.obj");
+            bxt = EE.СurrentResources.GetResource<IDrawable>("/models/box.obj");
         }
 
-        private IDraweble bxt = null;
+        private IDrawable bxt = null;
         public override void Draw()
         {
             G.PushMatrix();

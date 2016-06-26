@@ -6,16 +6,8 @@ using System.Runtime.CompilerServices;
 
 namespace EmyEngine.OpenGL
 {
-
-
-   
-
-
     public interface IGraphics
     {
-
-
-       
         void DrawRectangle(Vector3 v, Vector3 v1, Vector3 v2, Vector3 v3);
         void DrawSolidRectangle(Vector3 v, Vector3 v1, Vector3 v2, Vector3 v3);
         void DrawTexturedRectangle(Vector3 v, Vector2 tv, Vector3 v1, Vector2 tv1, Vector3 v2, Vector2 tv2, Vector3 v3, Vector2 tv3);

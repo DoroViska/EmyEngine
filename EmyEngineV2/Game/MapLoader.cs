@@ -37,7 +37,7 @@ namespace EmyEngine.Game
             AddType(typeof(MiniPlatformObject));
             AddType(typeof(WoodPlank));
             AddType(typeof(WoodDoor));
-            AddType(typeof(CarObject));
+            AddType(typeof(CarObjectPickUp));
      
             EE.Log("MapLoader::_setup OK");
             return true;

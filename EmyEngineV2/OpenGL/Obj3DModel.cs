@@ -16,7 +16,7 @@ using System.Runtime.CompilerServices;
 namespace EmyEngine.OpenGL
 {
 
-    public class Obj3DModel : IDraweble, IResource
+    public class Obj3DModel : IDrawable, IResource
     {
 
     

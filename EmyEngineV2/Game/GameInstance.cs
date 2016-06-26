@@ -116,7 +116,9 @@ namespace EmyEngine.Game
 
 
             obj.Instance = this;         
-            World.AddBody(obj.Body);           
+
+            World.AddBody(obj.Body);   
+                    
             _gameObjects.Add(obj);
 
             obj.AddedToInstance(this);
@@ -127,10 +129,12 @@ namespace EmyEngine.Game
             if (obj == null)
                 throw new ArgumentNullException(nameof(obj));
 
-            obj.Instance = null;      
+            obj.Instance = null;     
+             
             World.RemoveBody(obj.Body);
-            _gameObjects.Remove(obj);
+            
 
+            _gameObjects.Remove(obj);
             obj.RemovedFromInstance(this);
         }
 
